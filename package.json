@@ -22,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/NoroffFEU/css-frameworks-ca/issues"
   },
-  "homepage": "https://github.com/NoroffFEU/css-frameworks-ca#readme"
+  "homepage": "https://github.com/NoroffFEU/css-frameworks-ca#readme",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.3.1"
+  },
+  "devDependencies": {
+    "live-server": "^1.1.0",
+    "sass": "^1.67.0"
+  }
 }
