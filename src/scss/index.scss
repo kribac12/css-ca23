@@ -6,8 +6,12 @@
 
 h1,
 h2,
-.nav-item .navbar-brand {
+.nav-logo {
   color: $primary;
+}
+
+a {
+  text-decoration: none;
 }
 
 p,

@@ -2,15 +2,139 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grateful Profile</title>
+    <meta name="description" content="Grateful profile" />
+    <title>Grateful / Profile</title>
     <link rel="stylesheet" href="../dist/css/index.css" />
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-      crossorigin="anonymous"
-    ></script>
   </head>
-  <body></body>
+  <body cz-shortcut-listen="true">
+    <div class="col-lg-8 mx-auto p-3 py-md-5">
+      <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Gratitude</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html">Log in</a>
+                </li>
+              </ul>
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-secondary btn-sm" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <section class="about-section">
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="images/profile-4.jpg" class="img-fluid rounded-start" alt="..." />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h2 class="card-title">About me</h2>
+                  <p class="card-text me-5">
+                    Lorem ipsum dolor sit amet, est tota omnis bonorum ex. Ad sit aeque aeterno eligendi, quo id utinam vituperata. Nam duis aperiri ne, has
+                    labore qualisque cu. Te per principes expetendis consectetuer. Nec tation efficiendi ut. Per doctus electram id, nam ut tota veniam
+                    accumsan, habeo menandri postulant his at.
+                  </p>
+                  <p class="card-text me-5">
+                    Ne doctus mandamus democritum qui. Ei alii alterum usu, has an falli laboramus. Saepe legere liberavisse est in, nullam dissentiunt id vim.
+                    Omnes minimum consectetuer usu no. In mel error saperet apeirian. Stet nobis nonumes ne est.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="user-feed my-5">
+          <h2>My posts</h2>
+          <div class="row mb-3 text-center">
+            <div class="col-md-4 themed-grid-col">
+              <div class="card">
+                <div class="card-body">
+                  <p>Wed 31 Aug</p>
+                  <h5 class="card-title">I am grateful for...</h5>
+                  <p class="card-text">My fifth niece was born yesterday!</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 themed-grid-col">
+              <div class="card">
+                <div class="card-body">
+                  <p>Tue 30 Aug</p>
+                  <h5 class="card-title">I am grateful for...</h5>
+                  <p class="card-text">This pregnancy soon being over and not feeling like a whale anymore.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 themed-grid-col">
+              <div class="card">
+                <div class="card-body">
+                  <p>Mon 30 Aug</p>
+                  <h5 class="card-title">I am grateful for...</h5>
+                  <p class="card-text">My parents-in-law visiting and making dinner every day.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <form class="post-to-wall w-75 my-5">
+          <h2>Post to wall</h2>
+          <div class="form-group mt-3">
+            <label for="inputTitle">Title</label>
+            <input type="text" class="form-control mt-2" id="inputTitle" />
+          </div>
+          <div class="form-group mt-3">
+            <label for="inputTextarea">Post</label>
+            <textarea class="form-control mt-2" id="inputTextarea" rows="5"></textarea>
+          </div>
+          <button type="button" class="btn btn-outline-primary mt-4">Post to wall</button>
+        </form>
+        <section class="friends-section">
+          <h2>My friends</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Kristine</li>
+            <li class="list-group-item">Joar</li>
+            <li class="list-group-item">Jens</li>
+            <li class="list-group-item">Heidi</li>
+            <li class="list-group-item">Morten</li>
+          </ul>
+        </section>
+      </main>
+      <div class="container">
+        <footer class="py-3 my-4">
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="index.html" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="profile.html" class="nav-link px-2 text-muted">Profile</a></li>
+            <li class="nav-item"><a href="login.html" class="nav-link px-2 text-muted">Log in</a></li>
+          </ul>
+          <p class="text-center text-muted">© 2022 Kristine Bache</p>
+        </footer>
+      </div>
+    </div>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
