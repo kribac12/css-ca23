@@ -16,51 +16,98 @@
   <body cz-shortcut-listen="true">
     <div class="container">
       <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Navbar">
+          <div class="container-fluid">
+            <a class="navbar-brand nav-logo m-3 fs-2 fw-bold" href="index.html">Gratitude</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-          <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Navbar">
-            <div class="container-fluid">
-              <a class="navbar-brand nav-logo m-3 fs-2 fw-bold" href="index.html">Gratitude</a>
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="navbar-toggler-icon"></span>
-              </button>
-    
-              <div class="collapse navbar-collapse" id="navbarsExample09">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/index.html">Home</a>
-                      </li>
-                  <li class="nav-item">
-                    <a class="nav-link"href="/feed/index.html">Feed</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/profile/index.html">Profile</a>
-                  </li>
-                </ul>
-                <form class="d-flex"role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                  <button class="btn btn-outline-secondary btn-sm rounded" type="submit">Search</button>
-                </form>
+            <div class="collapse navbar-collapse" id="navbarsExample09">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/feed/index.html">Feed</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="/profile/index.html">Profile</a>
+                </li>
+              </ul>
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-secondary btn-sm rounded" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="container mt-3 px-0">
+          <h1 class="text-left border-bottom border-light" id="user-name">User</h1>
+          <div class="row my-5">
+            <!--About user-->
+            <div class="col-lg-3">
+              <div class bg-light rounded-2>
+                <h2>About me</h2>
+                <div id="aboutUser">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptate, laudantium, corrupti consectetur repellat eaque rem autem ipsum
+                    nobis placeat odit ut aliquid accusantium quod earum, animi dicta quaerat! Eaque!
+                  </p>
+                </div>
               </div>
             </div>
-          </nav>
+            <!--Your feed and posts section-->
+            <div class="col-lg-6">
+              <section id="post-to-feed" class="hidden">
+                <div class="card bg-primary mb-4">
+                  <form id="post-to-feed-form" class="mx-1">
+                    <div class="d-flex-column">
+                      <label for="post-comment" class="m-2 text-white">Post</label
+                      ><textarea
+                        class="form-control bg-light mb-2 border-0"
+                        id="post-comment"
+                        rows="4"
+                        placeholder="What are you grateful for?"
+                        name="post-comment"
+                        required
+                      ></textarea>
+                      <div class="py-2 d-flex justify-content-end">
+                        <input class="btn btn-light col-4" type="submit" value="Post" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </section>
+              <!--Your feed-->
+              <section class="">
+                <h2>My posts</h2>
+                <div id="my-posts"></div>
+              </section>
+            </div>
+            <!--Followers-->
+            <div class="col-lg-3 mb-4">
+              <div class="bg-light">
+                <h2>My friends</h2>
+                <p class="fw-bold">Followers</p>
+                <div class="d-flex flex-lg-column" id="followers"></div>
+                <p class="fw-bold">Following</p>
+                <div class="d-flex flex-lg-column" id="following"></div>
+              </div>
+            </div>
+          </div>
         </div>
-    </header>
-  <main>
-    <div class="container-xxl px-2"><h1 class="text-left border-bottom border-light">User</h1> <div class="row"><div class="col-md-4 mb-3">
-      <div class bg-light rounded-2> <h2>About me</h2><div id="aboutUser"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptate, laudantium, corrupti consectetur repellat eaque rem autem ipsum nobis placeat odit ut aliquid accusantium quod earum, animi dicta quaerat! Eaque!</p>
+      </main>
     </div>
-    </div>
-  </div>
-
-  </main>
-</div>
   </body>
 </html>
