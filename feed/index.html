@@ -53,6 +53,60 @@
         </div>
     </header>
   <main>
+    <div class="container mt-3 px-4">  
+      <div class="row my-5">
+        <!--About user-->
+        <div class="col-lg-4 bg-light">
+          <div class  rounded-2>
+            <h1 class="user" id="user-name"></h1>
+            <div id="aboutUser">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptate, laudantium, corrupti consectetur repellat eaque rem autem ipsum
+                nobis placeat odit ut aliquid accusantium quod earum, animi dicta quaerat! Eaque!
+              </p>
+            
+                <div class="bg-light">
+                  <h2>My friends</h2>
+                  <p class="fw-bold">Followers</p>
+                  <div class="d-flex flex-lg-column" id="followers"></div>
+                  <p class="fw-bold">Following</p>
+                  <div class="d-flex flex-lg-column" id="following"></div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+        <!--Your feed and posts section-->
+        <div class="col-lg-8">
+          <section id="post-to-feed" class="hidden">
+            <div class="card bg-primary mb-4">
+              <form id="post-to-feed-form" class="mx-1">
+                <div class="d-flex-column">
+                  <label for="post-comment" class="m-2 text-white">Post</label
+                  ><textarea
+                    class="form-control bg-light mb-2 border-0"
+                    id="post-comment"
+                    rows="4"
+                    placeholder="What are you grateful for?"
+                    name="post-comment"
+                    required
+                  ></textarea>
+                  <div class="py-2 d-flex justify-content-end">
+                    <input class="btn btn-light col-4" type="submit" value="Post" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+          <!--Your feed-->
+          <section class="">
+            <h2>Feed</h2>
+            <div id="my-posts"></div>
+          </section>
+        </div>
+  
+      </div>
+    </div>
     
   </main>
 </div></body>
