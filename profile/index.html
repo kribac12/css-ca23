@@ -31,7 +31,7 @@
               <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExample09">
+            <div class="collapse navbar-collapse" id="hamburger-nav">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                   <a class="nav-link" href="/index.html">Home</a>
@@ -57,9 +57,9 @@
           <div class="row my-5">
             <!--About user-->
             <div class="col-lg-3">
-              <div class bg-light rounded-2>
-                <h2>About me</h2>
+              <div class="bg-light rounded-2 p-3">
                 <div id="aboutUser">
+                  <h2>About me</h2>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptate, laudantium, corrupti consectetur repellat eaque rem autem ipsum
                     nobis placeat odit ut aliquid accusantium quod earum, animi dicta quaerat! Eaque!
@@ -69,27 +69,6 @@
             </div>
             <!--Your feed and posts section-->
             <div class="col-lg-6">
-              <section id="post-to-feed" class="hidden">
-                <div class="card bg-primary mb-4">
-                  <form id="post-to-feed-form" class="mx-1">
-                    <div class="d-flex-column">
-                      <label for="post-comment" class="m-2 text-white">Post</label
-                      ><textarea
-                        class="form-control bg-light mb-2 border-0"
-                        id="post-comment"
-                        rows="4"
-                        placeholder="What are you grateful for?"
-                        name="post-comment"
-                        required
-                      ></textarea>
-                      <div class="py-2 d-flex justify-content-end">
-                        <input class="btn btn-light col-4" type="submit" value="Post" />
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </section>
-              <!--Your feed-->
               <section class="">
                 <h2>My posts</h2>
                 <div id="my-posts"></div>
@@ -97,7 +76,7 @@
             </div>
             <!--Followers-->
             <div class="col-lg-3 mb-4">
-              <div class="bg-light">
+              <div class="bg-light rounded-2 p-3">
                 <h2>My friends</h2>
                 <p class="fw-bold">Followers</p>
                 <div class="d-flex flex-lg-column" id="followers"></div>
