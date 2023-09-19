@@ -1,37 +1,80 @@
 import { API_BASE_URL } from "../baseUrl.mjs";
 console.log(API_BASE_URL);
 
-const name = document.querySelector("#registerName");
-const email = document.querySelector("#registerEmail");
-const password = document.querySelector("#registerPassword");
-const register_error = document.querySelector("#registerErrorMessage");
+//Function for successful login, redirecting to feed page
+function handleLoginSuccess() {
+  window.location.href = "/feed/index.html";
+}
 
-/**
- * Register a new user
- */
+//Function for succesful registration, redirecting to new page
+function handleRegisterSuccess() {
+  window.location.href = "/feed/index.html";
+}
 
-export async function registerUser() {
-  const postData = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: name.value,
-      email: email.value,
-      password: password.value,
-    }),
-  };
+// Handle login form submissions
+const loginFormContent = document.getElementById("loginFormContent");
+loginFormContent.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
   try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/social/auth/register`, postData);
-    console.log(response);
-    const { status } = await response.json();
-    if (status === 200) {
-      location.href = `/profile/index.html`;
+    //Make API request for authentication to log in
+    const response = await fetch(`${API_BASE_URL} /api/v1/social/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    if (response.ok) {
+      const json = await response.json();
+      console.log("Successful login:", json);
+      handleLoginSuccess();
     } else {
-      register_error.innerHTML = message;
+      const errorMessage = await response.json();
+      console.log("Failed to login user:", errorMessage);
     }
   } catch (error) {
-    console.log(error);
+    console.error("Error:", error);
   }
-}
+});
+
+// Handle login form submissions
+
+const registerFormContent = document.getElementById("registerFormContent");
+registerFormContent.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const name = document.getElementById("registerName").value;
+  const email = document.getElementById("registerEmail").value;
+  const password = document.getElementById("registerPassword").value;
+
+  /**
+   * Register a new user with API
+   *
+   * @param {string} url
+   * @param {Object} data
+   * @returns {promise}
+   */
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/v1/social/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (response.ok) {
+      const json = await response.json();
+      console.log("Successful registration:", json);
+      handleRegisterSuccess();
+    } else {
+      const errorMessage = await response.json();
+      console.error("Failed to register user:", errorMessage);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
