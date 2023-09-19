@@ -1,12 +1,11 @@
 import { API_BASE_URL } from "../baseUrl.mjs";
-console.log(API_BASE_URL);
 
 //Function for successful login, redirecting to feed page
 function handleLoginSuccess() {
   window.location.href = "/feed/index.html";
 }
 
-//Function for succesful registration, redirecting to new page
+//Function for successful registration, redirecting to new page
 function handleRegisterSuccess() {
   window.location.href = "/feed/index.html";
 }
