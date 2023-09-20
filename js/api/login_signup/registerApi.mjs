@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://https://api.noroff.dev/api/v1";
+const API_BASE_URL = "https://nf-api.onrender.com/api/dev";
 /**
  * Function for registering a new user
  * @param {string} email - Email address for user registration.
@@ -35,8 +35,6 @@ async function registerUser(email, username, password) {
       const userData = await response.json();
       const userToken = userData.userToken;
       console.log(userToken);
-      // store JWT token in localStorage
-      localStorage.setItem("jwtToken", userToken);
       // redirect to feed if registration is a success
       window.location.href = "/feed/index.html";
     } else {
@@ -102,9 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-    const registerEmail = document.getElementById("registerEmail").value;
-    const registerName = document.getElementById("registerName").value;
-    const registerPassword = document.getElementById("registerPassword").value;
 
     await registerUser(registerEmail, registerName, registerPassword);
   });
