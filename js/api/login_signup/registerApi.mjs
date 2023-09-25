@@ -18,29 +18,34 @@ const API_BASE_URL = "https://api.noroff.dev/api/v1";
  *
  */
 
-async function registerUser(email, username, password) {
+async function registerUser(registerEmail, registerName, registerPassword) {
   try {
     const response = await fetch(`${API_BASE_URL}/social/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, username, password }),
+      body: JSON.stringify({ email: registerEmail, username: registerName, password: registerPassword }),
     });
 
     console.log(response);
+    console.log(registerEmail, registerName, registerPassword);
 
     if (response.ok) {
       //register success
       const userData = await response.json();
       const userToken = userData.userToken;
       console.log(userToken);
+      // store JWT token in localStorage
+      localStorage.setItem("jwtToken", userToken);
       // redirect to feed if registration is a success
       window.location.href = "/feed/index.html";
     } else {
       const userData = await response.json();
       //register fail
-      throw new Error(`Unable to register user:${userData.message}`);
+      console.log("Server Error Details:", userData.errors);
+      console.log("Error Path:", userData.errors[0].path);
+      throw new Error(`Unable to register user:${userData.errors[0].message}`);
     }
   } catch (error) {
     console.log(error);
@@ -64,14 +69,14 @@ async function registerUser(email, username, password) {
  * ```
  */
 
-async function loginUser(email, password) {
+async function loginUser(loginEmail, loginPassword) {
   try {
     const response = await fetch(`${API_BASE_URL}/social/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: loginEmail, password: loginPassword }),
     });
 
     if (response.ok) {
@@ -100,6 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
+    const registerEmail = document.getElementById("registerEmail");
+    const registerName = document.getElementById("registerName");
+    const registerPassword = document.getElementById("registerPassword");
 
     await registerUser(registerEmail.value, registerName.value, registerPassword.value);
   });
