@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://nf-api.onrender.com/api/dev";
+const API_BASE_URL = "https://api.noroff.dev/api/v1";
 /**
  * Function for registering a new user
  * @param {string} email - Email address for user registration.
@@ -101,14 +101,14 @@ document.addEventListener("DOMContentLoaded", function () {
   registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    await registerUser(registerEmail, registerName, registerPassword);
+    await registerUser(registerEmail.value, registerName.value, registerPassword.value);
   });
 
   loginForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-    const loginEmail = document.getElementById("loginEmail").value;
-    const loginPassword = document.getElementById("loginPassword").value;
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPassword = document.getElementById("loginPassword");
 
-    await loginUser(loginEmail, loginPassword);
+    await loginUser(loginEmail.value, loginPassword.value);
   });
 });
