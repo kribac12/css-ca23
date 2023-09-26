@@ -56,6 +56,9 @@ async function loginUser() {
     const userEmail = loginEmail.value;
     const userPassword = loginPassword.value;
     const registeredUser = JSON.parse(localStorage.getItem("registeredUser"));
+    console.log(loginEmail.value);
+    console.log(loginPassword.value);
+    console.log(registeredUser);
 
     if (!registeredUser || registeredUser.email !== userEmail || registeredUser.password !== userPassword) {
       throw new Error("Invalid email or password");
@@ -76,13 +79,17 @@ async function loginUser() {
       },
     });
 
+    console.log(response);
+
     if (!response.ok) {
       throw new Error(`HTTP error. Status: ${response.status}`);
     }
 
     const json = await response.json();
 
-    const token = json.token;
+    const token = json.accessToken;
+
+    console.log(token);
 
     if (token) {
       localStorage.setItem("jwtToken", token); // Store token in localStorage
