@@ -1,23 +1,25 @@
-const API_BASE_URL = "https://api.noroff.dev/api/v1/social/auth";
+import { API_BASE_URL } from "../baseUrl.mjs";
 
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
-const registerEmail = document.getElementById("registerEmail");
-const registerName = document.getElementById("registerName");
-const registerPassword = document.getElementById("registerPassword");
+
 const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
 
+/**
+ * Registers a new user
+ * @async
+ */
 async function registerUser() {
   try {
-    const userName = registerName.value;
-    const userEmail = registerEmail.value;
-    const userPassword = registerPassword.value;
+    const { value: name } = registerName;
+    const { value: email } = registerEmail;
+    const { value: password } = registerPassword;
 
     const newUser = {
-      name: userName,
-      email: userEmail,
-      password: userPassword,
+      name,
+      email,
+      password,
     };
     console.log(newUser);
 
@@ -53,22 +55,18 @@ registerForm.addEventListener("submit", function (event) {
   registerUser();
 });
 
+/**
+ * Logs in a new user
+ * @async
+ */
 async function loginUser() {
   try {
-    const userEmail = loginEmail.value;
-    const userPassword = loginPassword.value;
-    const registeredUser = JSON.parse(localStorage.getItem("registeredUser"));
-    console.log(loginEmail.value);
-    console.log(loginPassword.value);
-    console.log(registeredUser);
-
-    if (!registeredUser || registeredUser.email !== userEmail || registeredUser.password !== userPassword) {
-      throw new Error("Invalid email or password");
-    }
+    const { value: email } = loginEmail;
+    const { value: password } = loginPassword;
 
     const user = {
-      email: userEmail,
-      password: userPassword,
+      email,
+      password,
     };
 
     console.log(user);
@@ -109,3 +107,13 @@ loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
   loginUser();
 });
+
+/*
+// Check if user is already logged in by checking token in localStorage
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("jwtToken");
+  if (token) {
+    window.location.href = "/profile/index.html";
+  }
+});
+*/
