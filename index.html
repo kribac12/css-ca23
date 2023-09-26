@@ -76,7 +76,7 @@
         
         <!-- Pills content -->
         <div class="tab-content">
-          <div id="message"></div>
+          
           <div class="tab-pane fade show active" id="loginFormContent" aria-labelledby="tab-login">
             <form id="loginForm">
               <!-- Email input -->
@@ -92,6 +92,7 @@
               </div>
                <!--Sign in button-->            
                <button type ="submit" class="btn btn-primary btn-block mb-3">Login</button>
+<div id="loginMessage"></div>
              </form>
           </div>
           <div class="tab-pane fade show active" id="registerFormContent" role="tabpanel" aria-labelledby="tab-register">
@@ -112,7 +113,8 @@
                 <input type="password" id="registerPassword" name="registerPassword" class="form-control" required/>
               </div>
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>             
+              <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>   
+              <div id="registerMessage"></div>          
             </form>
           </div>
         </div>

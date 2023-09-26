@@ -34,7 +34,8 @@ async function registerUser() {
     }
 
     const json = await response.json();
-    alert("Registration successful");
+    //Display success message in HTML
+    document.getElementById("registerMessage").innerHTML = "Registration successful, you can now login.";
     console.log(json);
 
     //Store new user details in localStorage
@@ -42,7 +43,8 @@ async function registerUser() {
     localStorage.setItem("registeredUser", JSON.stringify(newUser));
   } catch (error) {
     console.error("Registration failed", error);
-    alert("Registration failed");
+    //Display error message in HTML
+    (document.getElementById("registerMessage").innerHTML = "Registration failed."), error;
   }
 }
 
@@ -99,7 +101,7 @@ async function loginUser() {
     }
   } catch (error) {
     console.error("Login failed", error);
-    alert("Login failed");
+    (document.getElementById("loginMessage").innerHTML = "Login failed."), error;
   }
 }
 
