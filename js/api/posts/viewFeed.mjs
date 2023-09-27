@@ -1,6 +1,14 @@
 import { API_BASE_URL } from "../base-url.mjs";
 import { formatDate } from "./date-formatter.mjs";
 
+/**
+ * Fetches posts from API
+ * @async
+ * @function
+ * @returns {Promise<Object[]>} - The promise resolves to an array of objects.
+ * @throws - Error if network request fails / if the user is not registered.
+ */
+
 async function fetchPosts() {
   try {
     const token = localStorage.getItem("jwtToken");
@@ -32,6 +40,13 @@ async function fetchPosts() {
   }
 }
 
+/**
+ * Renders an array of post objects to the DOM
+ * showing the posts on the page.
+ * @async
+ * @function
+ */
+
 async function renderPosts() {
   const posts = await fetchPosts();
 
@@ -47,32 +62,31 @@ async function renderPosts() {
 
   //Loop through every post in the array
   posts.forEach((post) => {
-    //Create div element for a single post
+    const { title, body, media, created, updated, _count } = post;
+
+    //Create div element for a post
     const postElement = document.createElement("div");
     postElement.classList.add("post", "card", "mb-3");
 
-    let imageHTML = "";
-    if (post.media) {
-      imageHTML = `
-        <img src="${post.media} class="post-image card-img-top img-fluid" alt="${post.title}" onerror="this.style.display='none'"/>`;
-    }
-
     // Use formatDate function
-    const createdDateString = formatDate(post.created);
-    const updatedDateString = formatDate(post.updated);
+    const createdDateString = formatDate(created);
+    const updatedDateString = formatDate(updated);
 
-    postElement.innerHTML = `
-    ${imageHTML}
-    <div class="card-body ps-3">
-    <h3 class="card-title">${post.title}</h3>
-    <p class="card-text">${post.body}</p>
-    </div>
-    <div class="card-footer text-muted">
-    <p>Posted: ${createdDateString}</p>
-    <p>Edited: ${updatedDateString}</p>
-    <p>Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
-    </div>
+    const imageHTML = media ? `<img src="${media}" alt="${title}" class="post-image card-img-top" onerror="this.style.display='none'"/>` : "";
+    const bodyHTML = `
+      <div class="card-body">
+        <h3 class="card-title">${title}</h3>
+        <p class="card-text">${body}</p>
+        <p>Posted: ${createdDateString}</p>
+        <p>Edited: ${updatedDateString}</p>
+      </div>
+      <div class="card-footer">
+        <p>Comments: ${_count.comments}</p>
+        <p>Reactions: ${_count.reactions}</p>
+      </div>
     `;
+
+    postElement.innerHTML = imageHTML + bodyHTML;
 
     postContainer.appendChild(postElement);
   });
