@@ -23,7 +23,7 @@ async function registerUser() {
     };
     console.log(newUser);
 
-    const response = await fetch(`${API_BASE_URL}/register`, {
+    const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
@@ -71,7 +71,7 @@ async function loginUser() {
 
     console.log(user);
 
-    const response = await fetch(`${API_BASE_URL}/login`, {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
