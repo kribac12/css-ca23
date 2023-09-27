@@ -7,8 +7,8 @@
     <meta name="description" content="Grateful sign in or register" />
     <title>Grateful social media</title>
     <link rel="stylesheet" href="/dist/css/index.css" />
-    <script type="module" src="js/navigation/pills-nav.mjs"></script></body>
-    <script type="module" src="js/api/login_signup/registerApi.mjs"></script>
+    <script type="module" src="js/navigation/pills-nav.mjs"></script>
+    <script type="module" src="js/api/login_signup/loginApi.mjs"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
@@ -40,10 +40,10 @@
                           <a class="nav-link active" href="index.html">Log in</a>
                         </li>
                     <li class="nav-item">
-                      <a class="nav-link disabled" aria-disabled="true" href="/feed/index.html">Feed</a>
+                      <a class="nav-link hidden" aria-hidden="true" href="/feed/index.html">Feed</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link disabled" aria-disabled="true" href="/profile/index.html">Profile</a>
+                      <a class="nav-link hidden" aria-hidden="true" href="/profile/index.html">Profile</a>
                     </li>
                   </ul>
                   <form class="d-flex"role="search">
@@ -76,9 +76,9 @@
         
         <!-- Pills content -->
         <div class="tab-content">
-          <div id="message"></div>
-          <div class="tab-pane fade show active" id="loginForm" aria-labelledby="tab-login">
-            <form id="loginFormContent">
+          
+          <div class="tab-pane fade show active" id="loginFormContent" aria-labelledby="tab-login">
+            <form id="loginForm">
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <label class="form-label" for="loginEmail">Email</label>
@@ -92,10 +92,11 @@
               </div>
                <!--Sign in button-->            
                <button type ="submit" class="btn btn-primary btn-block mb-3">Login</button>
+<div id="loginMessage"></div>
              </form>
           </div>
-          <div class="tab-pane fade show active" id="registerForm" role="tabpanel" aria-labelledby="tab-register">
-            <form id="registerFormContent">
+          <div class="tab-pane fade show active" id="registerFormContent" role="tabpanel" aria-labelledby="tab-register">
+            <form id="registerForm">
               <!-- Name input -->
               <div class="form-outline mb-4">
                 <label class="form-label" for="registerName">Name</label>
@@ -112,7 +113,8 @@
                 <input type="password" id="registerPassword" name="registerPassword" class="form-control" required/>
               </div>
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>             
+              <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>   
+              <div id="registerMessage"></div>          
             </form>
           </div>
         </div>
