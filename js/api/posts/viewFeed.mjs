@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../base-url.mjs";
+import { formatDate } from "./date-formatter.mjs";
 
 async function fetchPosts() {
   try {
@@ -31,8 +32,6 @@ async function fetchPosts() {
   }
 }
 
-fetchPosts();
-
 async function renderPosts() {
   const posts = await fetchPosts();
 
@@ -50,16 +49,29 @@ async function renderPosts() {
   posts.forEach((post) => {
     //Create div element for a single post
     const postElement = document.createElement("div");
-    postElement.classList.add("post");
+    postElement.classList.add("post", "card", "mb-3");
+
+    let imageHTML = "";
+    if (post.media) {
+      imageHTML = `
+        <img src="${post.media} class="post-image card-img-top img-fluid" alt="${post.title}" onerror="this.style.display='none'"/>`;
+    }
+
+    // Use formatDate function
+    const createdDateString = formatDate(post.created);
+    const updatedDateString = formatDate(post.updated);
 
     postElement.innerHTML = `
-    <h3>${post.title}</h3>
-    <p>${post.body}</p>
-    <img src="${post.media}" alt="${post.title}"/>
-    <p>Posted: ${post.created}</p>
-    <p>Edited: ${post.updated}</p>
-    <p>Comments: ${post._count.comments}</p>
-    <p>Reactions: ${post._count.reactions}</p>
+    ${imageHTML}
+    <div class="card-body ps-3">
+    <h3 class="card-title">${post.title}</h3>
+    <p class="card-text">${post.body}</p>
+    </div>
+    <div class="card-footer text-muted">
+    <p>Posted: ${createdDateString}</p>
+    <p>Edited: ${updatedDateString}</p>
+    <p>Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
+    </div>
     `;
 
     postContainer.appendChild(postElement);

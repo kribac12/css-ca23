@@ -1,5 +1,7 @@
 //Bootstrap variable overrides
-@import "variables.scss";
+@import "variables/variables";
+
+@import "components/post";
 
 //Bootstrap styles
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
