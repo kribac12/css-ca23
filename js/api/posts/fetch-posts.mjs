@@ -1,10 +1,15 @@
 import { API_BASE_URL } from "../base-url.mjs";
 
-export async function fetchPosts(filters = {}) {
-  try {
-    const url = new URL(`${API_BASE_URL}/posts`);
-    Object.keys(filters).forEach((key) => url.searchParams.append(key, filters[key]));
+/**
+ * Fetches posts from API
+ * @async
+ * @function
+ * @returns {Promise<Object[]>} - The promise resolves to an array of objects.
+ * @throws - Error if network request fails / if the user is not registered.
+ */
 
+export async function fetchPosts() {
+  try {
     const token = localStorage.getItem("jwtToken");
     if (!token) {
       console.error("No token retrieved. User must log in to fetch posts. Redirecting to login page");
@@ -12,7 +17,7 @@ export async function fetchPosts(filters = {}) {
       return;
     }
     //Fetch post feed from API
-    const response = await fetch(url.toString(), {
+    const response = await fetch(`${API_BASE_URL}/posts`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,9 +31,10 @@ export async function fetchPosts(filters = {}) {
       throw new Error(`HTTP error. Status: ${response.status}`);
     }
 
-    return await response.json();
+    const posts = await response.json();
+    return posts;
   } catch (error) {
     console.error("Failed to fetch the post feed", error);
-    return [];
+    return null;
   }
 }
