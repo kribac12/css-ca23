@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../base-url.mjs";
+/*import { API_BASE_URL } from "../base-url.mjs";
 import { formatDate } from "./date-formatter.mjs";
 
 /**
@@ -9,6 +9,7 @@ import { formatDate } from "./date-formatter.mjs";
  * @throws - Error if network request fails / if the user is not registered.
  */
 
+/*
 async function fetchPosts() {
   try {
     const token = localStorage.getItem("jwtToken");
@@ -46,6 +47,8 @@ async function fetchPosts() {
  * @async
  * @function
  */
+
+/*
 
 async function renderPosts() {
   const posts = await fetchPosts();
@@ -92,4 +95,4 @@ async function renderPosts() {
   });
 }
 
-renderPosts();
+renderPosts(); */
