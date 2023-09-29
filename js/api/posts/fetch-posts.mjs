@@ -17,7 +17,7 @@ export async function fetchPosts() {
       return;
     }
     //Fetch post feed from API
-    const response = await fetch(`${API_BASE_URL}/posts`, {
+    const response = await fetch(`${API_BASE_URL}/posts?_author=true`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -36,5 +36,26 @@ export async function fetchPosts() {
   } catch (error) {
     console.error("Failed to fetch the post feed", error);
     return null;
+  }
+}
+
+export async function fetchSinglePost(postId, token) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error. Status:${response.status}`);
+    }
+    const post = await response.json();
+    return post;
+  } catch (error) {
+    console.error(`Failed to fetch post ${postId}`, error);
+    throw error;
   }
 }
