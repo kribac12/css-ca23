@@ -1,16 +1,27 @@
+/**
+ * Adds event listener to search bar. When user types something in search bar
+ * the posts are filtered based on this input and renders the posts.
+ * @param {Object[]} posts - Array of posts to be filtered.
+ * @param {Function} renderPosts - Function to render the filtered posts.
+ */
+
 export function addSearchEventListener(posts, renderPosts) {
   const searchBar = document.getElementById("searchBar");
 
-  searchBar.addEventListener("input", () => {
-    const searchRequest = searchBar.value.trim().toLowerCase();
+  if (searchBar) {
+    searchBar.addEventListener("input", () => {
+      const searchRequest = searchBar.value.trim().toLowerCase();
 
-    const searchedPosts = posts.filter(({ title, body }) => {
-      const searchedTitle = title ? title.toLowerCase() : "";
-      const searchedBody = body ? body.toLowerCase() : "";
+      const searchedPosts = posts.filter(({ title = "", body = "" }) => {
+        const searchedTitle = title ? title.toLowerCase() : "";
+        const searchedBody = body ? body.toLowerCase() : "";
 
-      return searchedTitle.includes(searchRequest) || searchedBody.includes(searchRequest);
+        return searchedTitle.includes(searchRequest) || searchedBody.includes(searchRequest);
+      });
+
+      renderPosts(searchedPosts);
     });
-
-    renderPosts(searchedPosts);
-  });
+  } else {
+    console.warn("Search bar not available.");
+  }
 }
