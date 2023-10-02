@@ -1,25 +1,19 @@
 import { API_BASE_URL } from "../base-url.mjs";
 
-async function createPost(title, body, media) {
+export async function createPost(title, body, media) {
   try {
-    const entryToken = localStorage.getItem("jwtToken");
+    const jwtToken = localStorage.getItem("jwtToken");
 
-    if (!entryToken) {
+    if (!jwtToken) {
       throw new Error("Token not found");
     }
 
-    const newPost = {
-      title,
-      body,
-      media,
-    };
-
-    const response = await fetch(`${API_BASE_URL}/social/posts`, {
+    const response = await fetch(`${API_BASE_URL}/posts`, {
       method: "POST",
-      body: JSON.stringify(newPost),
+      body: JSON.stringify({ title, body, media }),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${jwtToken}`,
       },
     });
 
@@ -27,14 +21,30 @@ async function createPost(title, body, media) {
       throw new Error(`HTTP error. Status: ${response.status}`);
     }
 
-    const json = await response.json();
-    console.log("Post added:", json);
-
-    return json;
+    const newPost = await response.json();
+    return newPost;
   } catch (error) {
     console.error("Failed creating post:", error);
     throw error;
   }
 }
 
-export { createPost };
+export async function handleCreatePostSubmission(formElement, onPostCreated) {
+  formElement.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const { title, body, media } = event.target.elements;
+
+    try {
+      const newPost = await createPost(title.value, body.value, media.value);
+      console.log("Post added:", newPost);
+
+      if (typeof onPostCreated === "function") {
+        onPostCreated(newPost);
+        formElement.reset();
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
+}
