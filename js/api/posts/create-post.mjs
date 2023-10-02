@@ -8,7 +8,7 @@ export async function createPost(title, body, media) {
       throw new Error("Token not found");
     }
 
-    const response = await fetch(`${API_BASE_URL}/posts`, {
+    const response = await fetch(`${API_BASE_URL}/posts?_author=true`, {
       method: "POST",
       body: JSON.stringify({ title, body, media }),
       headers: {

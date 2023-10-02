@@ -41,7 +41,7 @@ export async function fetchPosts() {
 
 export async function fetchSinglePost(postId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true?`, {
+    const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
