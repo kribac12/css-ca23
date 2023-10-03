@@ -16,7 +16,7 @@ function createPostElement(post) {
 
   const imageHTML = media ? `<img src="${media}" alt="${title}" class="post-image card-img-top" onerror="this.style.display='none'"/>` : "";
   const avatarHTML = authorAvatar ? `<img src="${authorAvatar}" alt="${authorName}" class="author-avatar"/>` : "";
-  const authorHTML = `<p>Author: ${authorName} ${authorEmail ? `(${authorEmail})` : ""}</p>
+  const authorHTML = `<p>Author: ${authorName} </p>
    ${avatarHTML} `;
 
   const bodyHTML = `
