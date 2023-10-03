@@ -1,5 +1,5 @@
-import { handleCreatePostSubmission } from "./api/posts/create-post.mjs";
-import { renderMyPost } from "./api/posts/render-new-post.mjs";
+import { handleCreatePostSubmission } from "./api/posts/new-posts/create-post.mjs";
+import { renderMyPost } from "./api/posts/new-posts/render-new-post.mjs";
 
 const createPostForm = document.getElementById("createPostForm");
 
