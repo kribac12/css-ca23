@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../base-url.mjs";
+import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 
 export async function createPost(title, body, media) {
   try {
