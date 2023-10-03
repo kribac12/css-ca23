@@ -20,3 +20,9 @@ export async function renderMyPost(newPost) {
     console.error("Error rendering post:", error);
   }
 }
+
+export function savePost(newPost) {
+  let posts = JSON.parse(localStorage.getItem("posts")) || [];
+  posts.push(newPost);
+  localStorage.setItem("posts", JSON.stringify(posts));
+}
