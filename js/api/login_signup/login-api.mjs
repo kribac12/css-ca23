@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../utilities/base-url.mjs";
+import { API_BASE_URL } from "../base-url.mjs";
 
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
