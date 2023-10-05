@@ -46,7 +46,7 @@ async function registerUser() {
   } catch (error) {
     console.error("Registration failed", error);
     //Display error message in HTML
-    (document.getElementById("registerMessage").innerHTML = "Registration failed."), error;
+    (document.getElementById("registerMessage").innerText = "Registration failed."), error;
   }
 }
 

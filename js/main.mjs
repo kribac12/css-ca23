@@ -13,7 +13,7 @@ handleCreatePostSubmission(createPostForm, async (newPost) => {
   }
 });
 
-function renderSavedPosts() {
+function renderSavedPosts(userId) {
   let savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
   savedPosts.forEach((post) => renderMyPost(post));
 }
