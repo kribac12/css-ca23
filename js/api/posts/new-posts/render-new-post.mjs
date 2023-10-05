@@ -2,10 +2,18 @@ import { deletePost, updateLocalStorageDeleted } from "../delete-posts/delete-po
 import { toggleEditForm } from "../edit-posts/edit-post.mjs";
 import { handleEditFormSubmission } from "../edit-posts/post-ui-updates.mjs";
 
-export async function renderMyPost(newPost) {
+/**
+ * Function for rendering new post
+ * @param {Object} paramObj - New post data.
+ * @param {string} paramObj.id - The post ID.
+ * @param {string} paramObj.title - The post title.
+ * @param {string} paramObj.body - The post body.
+ * @param {string} [paramObj.media] - The post's media URL.
+ *
+ * @returns{Promise<void>}
+ */
+export async function renderMyPost({ id, title, body, media }) {
   try {
-    const { id, title, body, media } = newPost;
-
     // Creating elements
     const postElement = document.createElement("div");
     const titleElement = document.createElement("h2");
@@ -19,13 +27,11 @@ export async function renderMyPost(newPost) {
     editButton.textContent = "Edit";
     deleteButton.textContent = "Delete";
 
-    // Style edit and delete buttons
-
+    // Styling edit and delete buttons
     editButton.className = "btn btn-primary";
     deleteButton.className = "btn btn-secondary m-4";
 
     // Handling media element
-
     const mediaElement = document.createElement("img");
     if (media) {
       mediaElement.src = media;
@@ -37,7 +43,7 @@ export async function renderMyPost(newPost) {
     postElement.appendChild(bodyElement);
 
     // Creating and handling edit form and delete
-    const editForm = createEditForm(newPost.title, newPost.body, newPost.media, newPost.id, handleEditFormSubmission, titleElement, bodyElement, mediaElement);
+    const editForm = createEditForm(title, body, media, id, handleEditFormSubmission, titleElement, bodyElement, mediaElement);
     editButton.onclick = () => toggleEditForm(editForm);
     deleteButton.onclick = () => showDeleteModal(id);
 
@@ -45,13 +51,27 @@ export async function renderMyPost(newPost) {
     postElement.appendChild(editForm);
     postElement.appendChild(deleteButton);
 
-    document.getElementById("myPostsContainer").appendChild(postElement);
+    const container = document.getElementById("myPostsContainer");
+    container.insertBefore(postElement, container.firstChild);
 
     createDeleteModal(id, postElement); // modal for the delete action
   } catch (error) {
     console.error("Error rendering post:", error);
   }
 }
+
+/**
+ * Create edit form.
+ * @param {string} title - Initial title value.
+ * @param {string} body - Initial body value.
+ * @param {string} media - Initial media value.
+ * @param {string} postId - ID of the post being updated.
+ * @param {function} submitHandler - Function to handle form submission.
+ * @param {HTMLElement} titleElement - Displays the post title.
+ * @param {HTMLElement} bodyElement - Displays the post body.
+ * @param {HTMLElement} mediaElement - Displays the post media.
+ * @returns {HTMLFormElement} - The edit form created.
+ */
 
 function createEditForm(title, body, media, postId, submitHandler, titleElement, bodyElement, mediaElement) {
   const editForm = document.createElement("form");
@@ -84,12 +104,21 @@ function createEditForm(title, body, media, postId, submitHandler, titleElement,
   return editForm;
 }
 
+/**
+ * Save new post to localStorage.
+ * @param {Object} newPost - New post data.
+ */
 export function savePost(newPost) {
   let posts = JSON.parse(localStorage.getItem("posts")) || [];
   posts.push(newPost);
   localStorage.setItem("posts", JSON.stringify(posts));
 }
 
+/**
+ * Create and handle delete modal.
+ * @param {string} postId - ID of the post to delete.
+ * @param {HTMLElement} postElement - Element of the post to delete.
+ */
 function createDeleteModal(postId, postElement) {
   const modal = document.createElement("div");
   modal.classList.add("modal", "fade");
@@ -152,16 +181,15 @@ function createDeleteModal(postId, postElement) {
 
   document.body.appendChild(modal);
 
-  document.getElementById(`confirmDeleteButton${postId}`).onclick = async () => {
+  modal.bsModal = new bootstrap.Modal(modal);
+
+  confirmDeleteButton.onclick = async () => {
     console.log(`Trying to delete a post with ID: ${postId}`);
     try {
       await deletePost(postId);
       postElement.remove();
       updateLocalStorageDeleted(postId);
-      const deleteModalElement = document.getElementById(`deleteModal${postId}`);
-      const deleteModal = new bootstrap.Modal(deleteModalElement);
-      console.log(deleteModal);
-      deleteModal.hide();
+      modal.bsModal.hide();
       console.log("Your post was deleted.");
     } catch (error) {
       console.error("There was an error deleting post:", error);
@@ -169,7 +197,11 @@ function createDeleteModal(postId, postElement) {
   };
 }
 
+/**
+ * Show the delete modal.
+ * @param {string} postId - ID of the post to delete.
+ */
 function showDeleteModal(postId) {
-  const deleteModal = new bootstrap.Modal(document.getElementById(`deleteModal${postId}`));
-  deleteModal.show();
+  const modal = document.getElementById(`deleteModal${postId}`);
+  modal.bsModal.show();
 }
