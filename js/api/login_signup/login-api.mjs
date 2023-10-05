@@ -37,7 +37,7 @@ async function registerUser() {
 
     const json = await response.json();
     //Display success message in HTML
-    document.getElementById("registerMessage").innerHTML = "Registration successful, you can now login.";
+    document.getElementById("registerMessage").innerText = "Registration successful, you can now login.";
     console.log(json);
 
     //Store new user details in localStorage
@@ -88,18 +88,20 @@ async function loginUser() {
     const json = await response.json();
 
     const token = json.accessToken;
+    const userName = json.name;
 
     console.log(token);
 
     if (token) {
       localStorage.setItem("jwtToken", token); // Store token in localStorage
+      localStorage.setItem("userName", userName);
       window.location.href = "/profile/index.html";
     } else {
       throw new Error("No token received");
     }
   } catch (error) {
     console.error("Login failed", error);
-    (document.getElementById("loginMessage").innerHTML = "Login failed."), error;
+    (document.getElementById("loginMessage").innerText = "Login failed."), error;
   }
 }
 
