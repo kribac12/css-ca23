@@ -23,17 +23,3 @@ export async function fetchUserPosts(userName) {
     console.error("Failed to fetch posts", error);
   }
 }
-
-function displayUserPosts(posts) {
-  const postsContainer = document.getElementById("userPosts");
-  posts.forEach((post) => {
-    const postElement = document.createElement("div");
-    postElement.innerText = `
-    <h2>${post.title}</h2>
-    <p>${post.body}</p>
-    <img src="${post.media}" alt="${post.title}">
-    <p>Created: ${new Date(post.created).toLocaleString()}</p>
-    <p>Updated: ${new Date(post.updated).toLocaleString()}</p>`;
-    postsContainer.appendChild(postElement);
-  });
-}
