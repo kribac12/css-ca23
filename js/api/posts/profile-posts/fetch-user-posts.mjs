@@ -1,16 +1,6 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 
-document.addEventListener("DOMContentLoaded", function () {
-  const userName = localStorage.getItem("userName");
-  if (userName) {
-    document.getElementById("userNameDisplay").innerText = userName;
-    fetchUserPosts(userName);
-  } else {
-    throw new Error("No token received");
-  }
-});
-
-async function fetchUserPosts(userName) {
+export async function fetchUserPosts(userName) {
   try {
     const token = localStorage.getItem("jwtToken");
     if (!token) {
@@ -28,7 +18,7 @@ async function fetchUserPosts(userName) {
     }
 
     const posts = await response.json();
-    displayUserPosts(posts);
+    return posts;
   } catch (error) {
     console.error("Failed to fetch posts", error);
   }

@@ -12,11 +12,12 @@ export function addSearchEventListener(posts, renderPosts) {
     searchBar.addEventListener("input", () => {
       const searchRequest = searchBar.value.trim().toLowerCase();
 
-      const searchedPosts = posts.filter(({ title = "", body = "" }) => {
+      const searchedPosts = posts.filter(({ title = "", body = "", authorName = "" }) => {
         const searchedTitle = title ? title.toLowerCase() : "";
         const searchedBody = body ? body.toLowerCase() : "";
+        const searchedAuthor = authorName ? authorName.toLowerCase() : "";
 
-        return searchedTitle.includes(searchRequest) || searchedBody.includes(searchRequest);
+        return searchedTitle.includes(searchRequest) || searchedBody.includes(searchRequest) || searchedAuthor.includes(searchRequest);
       });
 
       renderPosts(searchedPosts);

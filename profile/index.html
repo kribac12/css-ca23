@@ -7,7 +7,7 @@
     <meta name="description" content="FetchFriends profile" />
     <title>FetchFriends / Profile</title>
     <link rel="stylesheet" href="../dist/css/index.css" />
-    <script type="module" src="/js/main.mjs"></script>
+    <script type="module" src="/js/profile.mjs"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
@@ -40,7 +40,7 @@
                   <a class="nav-link active" href="/profile/index.html">Profile</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link logout-link" href="/index.html">Logout</a>
+                  <a class="nav-link logoutLink" href="/index.html">Logout</a>
                 </li>
               </ul>
             </div>
@@ -49,7 +49,7 @@
       </header>
       <main>
         <div class="container mt-3 px-0">
-          <h1 class="text-left border-bottom border-light" id="userName">User</h1>
+          <h1 class="text-left border-bottom border-light" id="authorName"></h1>
           <div class="row my-5">
             <!--About user-->
             <div class="col-lg-4">
