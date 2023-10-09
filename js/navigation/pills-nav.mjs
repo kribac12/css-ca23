@@ -6,6 +6,9 @@ function switchToRegister() {
 
   loginForm.style.display = "none";
   registerForm.style.display = "block";
+
+  // Manage active tab style
+  activateTab("registerTab", "loginTab");
 }
 
 // Function to navigate to login tab
@@ -16,8 +19,17 @@ function switchToLogin() {
 
   loginForm.style.display = "block";
   registerForm.style.display = "none";
+
+  // Manage active tab style
+  activateTab("loginTab", "registerTab");
 }
 
+// Function to manage active tab style
+
+function activateTab(activeTabId, inactiveTabId) {
+  document.getElementById(activeTabId).classList.add("active");
+  document.getElementById(inactiveTabId).classList.remove("active");
+}
 // Add event listeners to the login and register tabs
 
 document.addEventListener("DOMContentLoaded", function () {

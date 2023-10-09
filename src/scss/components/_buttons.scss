@@ -1,0 +1,11 @@
+li {
+  &#loginTab,
+  &#registerTab {
+    &.active {
+      color: $primary;
+    }
+    &:hover {
+      background: lighten($primary, 40%);
+    }
+  }
+}

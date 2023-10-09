@@ -10,12 +10,12 @@ function createPostElement(post) {
 
   // Create post element
   const postElement = document.createElement("div");
-  postElement.classList.add("post", "card", "mb-3");
+  postElement.classList.add("post", "card", "mb-3", "relative-position");
 
   // HTML for the post
 
   const imageHTML = media ? `<img src="${media}" alt="${title}" class="post-image card-img-top" onerror="this.style.display='none'"/>` : "";
-  const avatarHTML = authorAvatar ? `<img src="${authorAvatar}" alt="${authorName}" class="author-avatar"/>` : "";
+  const avatarHTML = authorAvatar ? `<img src="${authorAvatar}" alt="${authorName}" class="author-avatar rounded-circle"/>` : "";
   const authorHTML = `<p>Author: ${authorName} </p>
    ${avatarHTML} `;
 

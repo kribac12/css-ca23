@@ -1,16 +1,17 @@
 //Logout function
 
-const logoutButton = document.getElementById("logoutButton");
-console.log("Logout button:", logoutButton);
+const logoutLink = document.getElementById("logoutLink");
+console.log("Logout link:", logoutLink);
 
-function logoutUser() {
+function logoutUser(event) {
+  event.preventDefault();
   console.log("Logout function called");
   localStorage.removeItem("jwtToken");
   window.location.href = "/index.html";
 }
 
-if (logoutButton) {
-  logoutButton.addEventListener("click", logoutUser);
+if (logoutLink) {
+  logoutLink.addEventListener("click", logoutUser);
 } else {
-  console.error("Logout button not found");
+  console.error("Logout link not found");
 }
