@@ -1,5 +1,6 @@
 import { fetchSinglePost } from "./fetch-posts.mjs";
 import { renderSinglePost } from "./render-posts.mjs";
+import "./api/login_signup/logout.mjs";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Extract postId from URL parameters

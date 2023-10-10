@@ -1,6 +1,6 @@
 //Logout function
 
-const logoutLink = document.getElementById("logoutLink");
+const logoutLink = document.querySelector(".logoutLink");
 console.log("Logout link:", logoutLink);
 
 function logoutUser(event) {
