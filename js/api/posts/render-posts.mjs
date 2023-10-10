@@ -54,7 +54,9 @@ export function renderSinglePost(post, containerId) {
 }
 
 export async function renderPosts(posts, containerId) {
+  console.log("Rendering posts:", posts);
   const postContainer = document.getElementById(containerId);
+  console.log("Post container:", postContainer);
   if (!postContainer || !posts) return;
 
   postContainer.innerHTML = "";

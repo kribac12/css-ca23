@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadAndDisplayUserName();
     const posts = await fetchPosts();
     document.getElementById("postContainer");
-
+    console.log("rendering posts:", posts);
     renderPosts(posts, "postContainer");
 
     //Call filter function
