@@ -1,18 +1,17 @@
 import { handleCreatePostSubmission } from "./api/posts/new-posts/create-post.mjs";
 import { renderMyPost, savePost } from "./api/posts/new-posts/render-new-post.mjs";
 import { fetchUserPosts } from "./api/posts/profile-posts/fetch-user-posts.mjs";
+import { loadAndDisplayUserName } from "./utilities/user.mjs";
 import "./api/login_signup/logout.mjs";
 
 const createPostForm = document.getElementById("createPostForm");
 
 document.addEventListener("DOMContentLoaded", async function () {
-  const userNameElement = document.getElementById("userName");
-  const userName = localStorage.getItem("userName");
-  if (userName) {
+  try {
+    const userName = await loadAndDisplayUserName();
     await renderSavedPosts(userName);
-    userNameElement.innerText = userName;
-  } else {
-    throw new Error("No token received");
+  } catch (error) {
+    console.error(error.message);
   }
 });
 

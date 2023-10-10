@@ -1,7 +1,8 @@
 import { viewPost } from "../../feed.mjs";
 import { formatDate } from "./date-formatter.mjs";
+import { createPost } from "./new-posts/create-post.mjs";
 
-function createPostElement(post) {
+export function createPostElement(post) {
   const { id, title, body, media, created, updated, _count, author: { name: authorName = "Anonymous", email: authorEmail, avatar: authorAvatar } = {} } = post;
 
   // Format dates
@@ -42,18 +43,18 @@ function createPostElement(post) {
   return postElement;
 }
 
-export function renderSinglePost(post) {
-  const postContainer = document.getElementById("singlePostContainer");
+export function renderSinglePost(post, containerId) {
+  const postContainer = document.getElementById(containerId);
   if (!postContainer || !post) return;
 
   //Clear existing posts
   postContainer.innerHTML = "";
-  const postElement = createPostElement(post);
-  postContainer.appendChild(postElement);
+
+  postContainer.appendChild(createPostElement(post));
 }
 
-export async function renderPosts(posts) {
-  const postContainer = document.getElementById("postContainer");
+export async function renderPosts(posts, containerId) {
+  const postContainer = document.getElementById(containerId);
   if (!postContainer || !posts) return;
 
   postContainer.innerHTML = "";

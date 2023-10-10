@@ -1,11 +1,10 @@
 import { fetchSinglePost } from "./fetch-posts.mjs";
 import { renderSinglePost } from "./render-posts.mjs";
-import "./api/login_signup/logout.mjs";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Extract postId from URL parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get("postId");
+
+  const postId = new URLSearchParams(window.location.search).get("postId");
 
   if (postId) {
     try {
@@ -17,7 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       const post = await fetchSinglePost(postId, token);
-      renderSinglePost(post);
+      document.getElementById("singlePostContainer");
+
+      renderSinglePost(post, "singlePostContainer");
     } catch (error) {
       console.error("Failed to render specific post", error);
     }
