@@ -25,12 +25,15 @@ export function addSearchEventListener(posts, renderPosts) {
     searchBar.addEventListener("input", () => {
       const searchRequest = searchBar.value.trim().toLowerCase();
 
-      const searchedPosts = posts.filter(({ title = "", body = "", authorName = "" }) => {
+      const searchedPosts = posts.filter((post) => {
+        const title = post.title || "";
+        const body = post.body || "";
+        const authorName = post.authorName || "";
+
         return title.toLowerCase().includes(searchRequest) || body.toLowerCase().includes(searchRequest) || authorName.toLowerCase().includes(searchRequest);
       });
 
       renderPosts(searchedPosts, "postContainer");
-      console.log("Searched posts:", searchedPosts);
     });
   } else {
     console.warn("Search bar not available.");
