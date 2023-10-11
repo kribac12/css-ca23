@@ -1,5 +1,19 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 
+/**
+ * Create new post by sending POST request to the API.
+ *
+ * @async
+ * @function
+ * @param {string} title - Post title.
+ * @param {string} body - Post body content.
+ * @param {string} media - Post media content.
+ * @returns {Promise<Object>} - Promise that resolves with the created post.
+ *
+ * @example
+ * createPost('Post title', 'This is the post's content.', 'mediaurl')
+ */
+
 export async function createPost(title, body, media) {
   try {
     const jwtToken = localStorage.getItem("jwtToken");
@@ -8,7 +22,7 @@ export async function createPost(title, body, media) {
       throw new Error("Token not found");
     }
 
-    const response = await fetch(`${API_BASE_URL}/posts?_author=true`, {
+    const response = await fetch(`${API_BASE_URL}/posts?_author=true&_comments=true&_reactions=true`, {
       method: "POST",
       body: JSON.stringify({ title, body, media }),
       headers: {
@@ -29,6 +43,22 @@ export async function createPost(title, body, media) {
   }
 }
 
+/**
+ * Adds event listener to form element to handle post submission.
+ * When submitted, the `createPost` function is called with form data,
+ * and if successful, `onPostCreated` callback is executed.
+ *
+ * @async
+ * @function
+ * @param {HTMLFormElement} formElement - Form element to which the submit event listener is attached.
+ * @param {function(Object):void} onPostCreated - Callback function after success.
+ *
+ * @example
+ * const form = document.getElementById('createPostForm');
+ * const onPostCreated = (newPost) => {
+ * };
+ * handleCreatePostSubmission(form, onPostCreated);
+ */
 export async function handleCreatePostSubmission(formElement, onPostCreated) {
   formElement.addEventListener("submit", async function (event) {
     event.preventDefault();

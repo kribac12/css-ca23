@@ -7,7 +7,9 @@ import "./api/login_signup/logout.mjs";
 
 // Define viewPost function
 export function viewPost(postId) {
-  window.location.href = `/single-post.html?postId=${postId}`;
+  if (!window.location.href.includes("/profile/index.html")) {
+    window.location.href = `/single-post.html?postId=${postId}`;
+  }
 }
 
 // Fetch and render posts upon DOMContentLoaded

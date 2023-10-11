@@ -3,6 +3,19 @@
  * the posts are filtered based on this input and renders the posts.
  * @param {Object[]} posts - Array of posts to be filtered.
  * @param {Function} renderPosts - Function to render the filtered posts.
+ *
+ * @example
+ * ```js
+ * const posts = [
+ * {title: 'Title1', body: 'Body1', authorName: 'Author1'},
+ * {title: 'Title2', body: 'Body2', authorName: 'Author2'}
+ * ];
+ * const renderPosts = (filteredPosts, containerId) => {
+ * // Code to render posts
+ * };
+ *
+ * addSearchEventListener(posts, renderPosts);
+ * ```
  */
 
 export function addSearchEventListener(posts, renderPosts) {
@@ -12,15 +25,15 @@ export function addSearchEventListener(posts, renderPosts) {
     searchBar.addEventListener("input", () => {
       const searchRequest = searchBar.value.trim().toLowerCase();
 
-      const searchedPosts = posts.filter(({ title = "", body = "", authorName = "" }) => {
-        const searchedTitle = title ? title.toLowerCase() : "";
-        const searchedBody = body ? body.toLowerCase() : "";
-        const searchedAuthor = authorName ? authorName.toLowerCase() : "";
+      const searchedPosts = posts.filter((post) => {
+        const title = post.title || "";
+        const body = post.body || "";
+        const authorName = post.authorName || "";
 
-        return searchedTitle.includes(searchRequest) || searchedBody.includes(searchRequest) || searchedAuthor.includes(searchRequest);
+        return title.toLowerCase().includes(searchRequest) || body.toLowerCase().includes(searchRequest) || authorName.toLowerCase().includes(searchRequest);
       });
 
-      renderPosts(searchedPosts);
+      renderPosts(searchedPosts, "postContainer");
     });
   } else {
     console.warn("Search bar not available.");

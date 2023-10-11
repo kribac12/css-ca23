@@ -17,7 +17,7 @@ export async function fetchPosts() {
       return;
     }
     //Fetch post feed from API
-    const response = await fetch(`${API_BASE_URL}/posts?_author=true`, {
+    const response = await fetch(`${API_BASE_URL}/posts?_author=true&_comments=true&_reactions=true`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export async function fetchPosts() {
 
 export async function fetchSinglePost(postId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true`, {
+    const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true&_comments=true&_reactions=true`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

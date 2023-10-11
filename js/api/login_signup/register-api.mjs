@@ -3,8 +3,12 @@ import { API_BASE_URL } from "../../utilities/base-url.mjs";
 const registerForm = document.getElementById("registerForm");
 
 /**
- * Registers a new user
+ * Registers a new user by sending user data to the API.
+ * Name, email, password are obtained from input fields.
+ * If registration is a successful, user's data is stored in local storage.
  * @async
+ * @function
+ * @throws {Error} Throws error if HTTP request fails.
  */
 export async function registerUser() {
   try {
@@ -42,9 +46,14 @@ export async function registerUser() {
   } catch (error) {
     console.error("Registration failed", error);
     //Display error message in HTML
-    (document.getElementById("registerMessage").innerText = "Registration failed."), error;
+    document.getElementById("registerMessage").innerText = `Registration failed: ${error}`;
   }
 }
+
+/**
+ * Adds event listener to registration forms, which prevents the default form submission
+ * behavior and calls `registerUser` function.
+ */
 
 registerForm.addEventListener("submit", function (event) {
   event.preventDefault();

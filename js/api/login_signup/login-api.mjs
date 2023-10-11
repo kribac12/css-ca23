@@ -5,8 +5,15 @@ const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
 
 /**
- * Logs in a new user
+ * Logs in a user.
+ *
+ * Sends POST request to authentication endpoint with user's email and password.
+ * With success, response should include an access token to be stored in `localStorage`,
+ * and user be directed to profile page. If authentication fails, an error is displayed.
+ *
  * @async
+ * @function
+ * @throws {Error} If HTTP request fails or token is not received.
  */
 export async function loginUser() {
   try {
@@ -50,10 +57,14 @@ export async function loginUser() {
     }
   } catch (error) {
     console.error("Login failed", error);
-    (document.getElementById("loginMessage").innerText = "Login failed."), error;
+    document.getElementById("loginMessage").innerText = `Login failed: ${error}`;
   }
 }
 
+/**
+ * Adds event listener to login form, preventing default form submission
+ * behavior and calling the `loginUser` function instead.
+ */
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
   loginUser();

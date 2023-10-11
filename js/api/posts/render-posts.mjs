@@ -1,9 +1,19 @@
 import { viewPost } from "../../feed.mjs";
 import { formatDate } from "./date-formatter.mjs";
-import { createPost } from "./new-posts/create-post.mjs";
+import { capitalizeFirstLetter } from "../../utilities/text-utils.mjs";
 
 export function createPostElement(post) {
-  const { id, title, body, media, created, updated, _count, author: { name: authorName = "Anonymous", email: authorEmail, avatar: authorAvatar } = {} } = post;
+  const {
+    id,
+    title,
+    body,
+    media,
+    created,
+    updated,
+    comments = [],
+    reactions = [],
+    author: { name: authorName = "Anonymous", email: authorEmail, avatar: authorAvatar } = {},
+  } = post;
 
   // Format dates
   const createdDateString = formatDate(created);
@@ -20,6 +30,26 @@ export function createPostElement(post) {
   const authorHTML = `<p>Author: ${authorName} </p>
    ${avatarHTML} `;
 
+  const commentsHTML = `
+    <ul class="comments-list">
+      ${comments
+        .map((comment) => {
+          const commentAuthor = comment.author || {};
+          const commentAuthorName = commentAuthor.name || "Anonymous";
+          const displayName = capitalizeFirstLetter(commentAuthorName);
+          const commentAuthorAvatar = commentAuthor.avatar
+            ? `<img src ="${commentAuthor.avatar}" alt="${displayName}" class="author-avatar rounded-circle"/>`
+            : "";
+          return `<li class="mb-2"><p>${commentAuthorAvatar} ${displayName}: ${comment.body}</p>
+    </li>`;
+        })
+        .join("")}
+    </ul>`;
+
+  const reactionsHTML = `<ul class="reactions-list"> ${reactions
+    .map((reaction) => `<li class="mb-2"><p>${reaction.symbol} ${reaction.count}</p></li>`)
+    .join("")}</ul>`;
+
   const bodyHTML = `
        <div class="card-body">
          <h3 class="card-title">${title}</h3>
@@ -27,16 +57,17 @@ export function createPostElement(post) {
          ${authorHTML}
          <p>Posted: ${createdDateString}</p>
          <p>Edited: ${updatedDateString}</p>
+        
        </div>
        <div class="card-footer">
-         <p>Comments: ${_count.comments}</p>
-         <p>Reactions: ${_count.reactions}</p>
+       ${commentsHTML}
+       ${reactionsHTML}
        </div>
      `;
 
   postElement.innerHTML = imageHTML + bodyHTML;
-
   postElement.addEventListener("click", () => {
+    console.log("postElement clicked, invoking viewPost");
     viewPost(id);
   });
 
@@ -55,6 +86,7 @@ export function renderSinglePost(post, containerId) {
 
 export async function renderPosts(posts, containerId) {
   const postContainer = document.getElementById(containerId);
+  console.log("Post container:", postContainer);
   if (!postContainer || !posts) return;
 
   postContainer.innerHTML = "";
