@@ -18,7 +18,7 @@ export async function deletePost(postId) {
   const jwtToken = localStorage.getItem("jwtToken");
   if (!jwtToken) throw new Error("Token not found.");
 
-  const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
+  const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true&_comments=true&_reactions=true`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${jwtToken}` },
   });

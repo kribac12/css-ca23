@@ -1,7 +1,6 @@
 import { viewPost } from "../../feed.mjs";
 import { formatDate } from "./date-formatter.mjs";
 import { capitalizeFirstLetter } from "../../utilities/text-utils.mjs";
-import { createPost } from "./new-posts/create-post.mjs";
 
 export function createPostElement(post) {
   const {
@@ -11,8 +10,8 @@ export function createPostElement(post) {
     media,
     created,
     updated,
-    comments,
-    reactions,
+    comments = [],
+    reactions = [],
     author: { name: authorName = "Anonymous", email: authorEmail, avatar: authorAvatar } = {},
   } = post;
 
@@ -68,6 +67,7 @@ export function createPostElement(post) {
 
   postElement.innerHTML = imageHTML + bodyHTML;
   postElement.addEventListener("click", () => {
+    console.log("postElement clicked, invoking viewPost");
     viewPost(id);
   });
 
@@ -85,7 +85,6 @@ export function renderSinglePost(post, containerId) {
 }
 
 export async function renderPosts(posts, containerId) {
-  console.log("Rendering posts:", posts);
   const postContainer = document.getElementById(containerId);
   console.log("Post container:", postContainer);
   if (!postContainer || !posts) return;

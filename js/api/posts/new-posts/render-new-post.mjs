@@ -1,6 +1,7 @@
 import { deletePost, updateLocalStorageDeleted } from "../delete-posts/delete-post.mjs";
 import { toggleEditForm } from "../edit-posts/edit-post.mjs";
 import { handleEditFormSubmission } from "../edit-posts/post-ui-updates.mjs";
+import { createPostElement } from "../render-posts.mjs";
 
 /**
  * Function for rendering new post
@@ -12,40 +13,38 @@ import { handleEditFormSubmission } from "../edit-posts/post-ui-updates.mjs";
  *
  * @returns{Promise<void>}
  */
-export async function renderMyPost({ id, title, body, media }) {
+export async function renderMyPost(postData) {
   try {
-    // Creating elements
-    const postElement = document.createElement("div");
-    const titleElement = document.createElement("h2");
-    const bodyElement = document.createElement("p");
+    const { id, title, body, media } = postData;
+    const postElement = createPostElement(postData);
+
+    const titleElement = postElement.querySelector(".post-title");
+    const bodyElement = postElement.querySelector(".post-body");
+    const mediaElement = postElement.querySelector(".post-media");
+
+    console.log("titleElement:", titleElement);
+    console.log("bodyElement:", bodyElement);
+    console.log("mediaElement:", mediaElement);
+
+    // Creating elements and setting functionality
     const editButton = document.createElement("button");
-    const deleteButton = document.createElement("button");
-
-    // Setting content
-    titleElement.textContent = title;
-    bodyElement.textContent = body;
     editButton.textContent = "Edit";
-    deleteButton.textContent = "Delete";
-
-    // Styling edit and delete buttons
     editButton.className = "btn btn-primary";
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
     deleteButton.className = "btn btn-secondary m-4";
-
-    // Handling media element
-    const mediaElement = document.createElement("img");
-    if (media) {
-      mediaElement.src = media;
-      postElement.appendChild(mediaElement);
-    }
-
-    // Appending child elements
-    postElement.appendChild(titleElement);
-    postElement.appendChild(bodyElement);
 
     // Creating and handling edit form and delete
     const editForm = createEditForm(title, body, media, id, handleEditFormSubmission, titleElement, bodyElement, mediaElement);
-    editButton.onclick = () => toggleEditForm(editForm);
-    deleteButton.onclick = () => showDeleteModal(id);
+    editButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+      toggleEditForm(editForm);
+    });
+
+    deleteButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+      showDeleteModal(postData.id, postElement);
+    });
 
     postElement.appendChild(editButton);
     postElement.appendChild(editForm);
@@ -54,7 +53,7 @@ export async function renderMyPost({ id, title, body, media }) {
     const container = document.getElementById("myPostsContainer");
     container.insertBefore(postElement, container.firstChild);
 
-    createDeleteModal(id, postElement); // modal for the delete action
+    createDeleteModal(postData.id, postElement); // modal for the delete action
   } catch (error) {
     console.error("Error rendering post:", error);
   }
@@ -99,7 +98,19 @@ function createEditForm(title, body, media, postId, submitHandler, titleElement,
   editForm.appendChild(saveButton);
   editForm.style.display = "none";
 
-  editForm.onsubmit = (event) => submitHandler(event, postId, titleElement, bodyElement, mediaElement);
+  [editTitle, editBody, editMedia, saveButton].forEach((control) => {
+    control.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+  });
+
+  editForm.onsubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("Form submission prevented, propagation stopped.");
+    console.log("Parameters before calling submitHandler", event, postId, titleElement, bodyElement, mediaElement);
+    submitHandler(event, postId, titleElement, bodyElement, mediaElement);
+  };
 
   return editForm;
 }
@@ -187,6 +198,7 @@ function createDeleteModal(postId, postElement) {
     console.log(`Trying to delete a post with ID: ${postId}`);
     try {
       await deletePost(postId);
+      console.log(deletePost);
       postElement.remove();
       updateLocalStorageDeleted(postId);
       modal.bsModal.hide();
@@ -203,5 +215,6 @@ function createDeleteModal(postId, postElement) {
  */
 function showDeleteModal(postId) {
   const modal = document.getElementById(`deleteModal${postId}`);
+  console.log(modal);
   modal.bsModal.show();
 }

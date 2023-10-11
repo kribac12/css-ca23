@@ -1,5 +1,5 @@
 import { fetchSinglePost } from "./fetch-posts.mjs";
-import "./render-posts.mjs";
+import { renderSinglePost } from "./render-posts.mjs";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Extract postId from URL parameters

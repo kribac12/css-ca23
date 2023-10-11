@@ -19,6 +19,7 @@ import { updatePost } from "./edit-post.mjs";
  */
 
 export async function handleEditFormSubmission(event, postId, titleElement, bodyElement, mediaElement) {
+  console.log("Parameters inside handleEditFormSubmission:", event, postId, titleElement, bodyElement, mediaElement);
   event.preventDefault();
   const { title, body, media } = event.target.elements;
 
@@ -47,10 +48,17 @@ export async function handleEditFormSubmission(event, postId, titleElement, body
  */
 
 function updateUIWithPostData(updatedPost, titleElement, bodyElement, mediaElement) {
+  if (!titleElement || !bodyElement) {
+    console.error("Title or body element is null:", titleElement, bodyElement);
+    return;
+  }
+  console.log(updatedPost);
   titleElement.textContent = updatedPost.title;
   bodyElement.textContent = updatedPost.body;
-  if (updatedPost.media) {
+  if (mediaElement && updatedPost.media) {
     mediaElement.src = updatedPost.media;
+  } else if (!mediaElement && updatedPost.media) {
+    console.error("Media element is null but post has media data:", updatedPost.media);
   }
 }
 

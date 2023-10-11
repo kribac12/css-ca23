@@ -10,6 +10,7 @@ import { API_BASE_URL } from "../../../utilities/base-url.mjs";
  */
 export function toggleEditForm(formElement) {
   formElement.style.display = formElement.style.display === "none" ? "block" : "none";
+  console.log(formElement);
 }
 
 /**
@@ -60,7 +61,7 @@ export async function updatePost(postId, title, body, media) {
       throw new Error("Token not found.");
     }
 
-    const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
+    const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true&_comments=true&_reactions=true`, {
       method: "PUT",
       body: JSON.stringify({ title, body, media }),
       headers: {
@@ -74,6 +75,7 @@ export async function updatePost(postId, title, body, media) {
     }
 
     const updatedPost = await response.json();
+    console.log("Updated Post:", updatedPost);
     return updatedPost;
   } catch (error) {
     console.error("Failed updating post:", error);

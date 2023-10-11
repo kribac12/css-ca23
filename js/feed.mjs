@@ -7,7 +7,9 @@ import "./api/login_signup/logout.mjs";
 
 // Define viewPost function
 export function viewPost(postId) {
-  window.location.href = `/single-post.html?postId=${postId}`;
+  if (!window.location.href.includes("/profile/index.html")) {
+    window.location.href = `/single-post.html?postId=${postId}`;
+  }
 }
 
 // Fetch and render posts upon DOMContentLoaded
@@ -16,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadAndDisplayUserName();
     const posts = await fetchPosts();
     document.getElementById("postContainer");
-    console.log("rendering posts:", posts);
+
     renderPosts(posts, "postContainer");
 
     //Call filter function
