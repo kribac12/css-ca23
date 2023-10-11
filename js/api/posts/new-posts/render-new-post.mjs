@@ -22,11 +22,6 @@ export async function renderMyPost(postData) {
     const bodyElement = postElement.querySelector(".post-body");
     const mediaElement = postElement.querySelector(".post-media");
 
-    if (!titleElement || !bodyElement || !mediaElement) {
-      console.error("Element(s) not found:", { titleElement, bodyElement, mediaElement });
-      return;
-    }
-
     // Creating elements and setting functionality
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
