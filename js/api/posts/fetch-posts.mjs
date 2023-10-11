@@ -17,7 +17,7 @@ export async function fetchPosts() {
       return;
     }
     //Fetch post feed from API
-    const response = await fetch(`${API_BASE_URL}/posts?_author=true`, {
+    const response = await fetch(`${API_BASE_URL}/posts?_author=true&_comments=true&_reactions=true`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -6,7 +6,7 @@ export async function fetchUserPosts(userName) {
     if (!token) {
       throw new Error("No authentication token found");
     }
-    const response = await fetch(`${API_BASE_URL}/profiles/${userName}/posts`, {
+    const response = await fetch(`${API_BASE_URL}/profiles/${userName}/posts?_author=true&_comments=true&_reactions=true`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
