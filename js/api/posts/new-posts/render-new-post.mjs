@@ -22,9 +22,10 @@ export async function renderMyPost(postData) {
     const bodyElement = postElement.querySelector(".post-body");
     const mediaElement = postElement.querySelector(".post-media");
 
-    console.log("titleElement:", titleElement);
-    console.log("bodyElement:", bodyElement);
-    console.log("mediaElement:", mediaElement);
+    if (!titleElement || !bodyElement || !mediaElement) {
+      console.error("Element(s) not found:", { titleElement, bodyElement, mediaElement });
+      return;
+    }
 
     // Creating elements and setting functionality
     const editButton = document.createElement("button");

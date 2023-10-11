@@ -23,6 +23,12 @@ export async function handleEditFormSubmission(event, postId, titleElement, body
   event.preventDefault();
   const { title, body, media } = event.target.elements;
 
+  console.log("Form elements:", { title, body, media });
+
+  if (!title || !body || !media) {
+    console.error("Form input(s) not found:", { title, body, media });
+    return;
+  }
   try {
     const updatedPost = await updatePost(postId, title.value, body.value, media.value);
     console.log(updatedPost);
@@ -48,7 +54,7 @@ export async function handleEditFormSubmission(event, postId, titleElement, body
  */
 
 function updateUIWithPostData(updatedPost, titleElement, bodyElement, mediaElement) {
-  if (!titleElement || !bodyElement) {
+  if (!titleElement || !bodyElement || !mediaElement) {
     console.error("Title or body element is null:", titleElement, bodyElement);
     return;
   }
