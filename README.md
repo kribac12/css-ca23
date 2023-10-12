@@ -17,3 +17,6 @@ To run the app, run the following commands:
 npm run start
 npm run watch
 
+## Trello Board
+https://trello.com/b/24S7pEOp/javascript-2-ca
+
