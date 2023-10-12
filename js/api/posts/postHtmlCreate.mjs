@@ -11,19 +11,18 @@ export function createAuthorHtml(name, avatar) {
   return `<p>Author: ${name}</p>${avatarHTML}`;
 }
 
-export function createCommentHtml(comments, capitalizeFirstLetter) {
-  return `<ul class="comments-list">
-  ${comments
-    .map((comment) => {
-      const commentAuthor = comment.author || {};
-      const commentAuthorName = commentAuthor.name || "Anonymous";
-      const displayName = capitalizeFirstLetter(commentAuthorName);
-      const commentAuthorAvatar = commentAuthor.avatar ? `<img src ="${commentAuthor.avatar}" alt="${displayName}" class="author-avatar rounded-circle"/>` : "";
-      return `<li class="mb-2"><p>${commentAuthorAvatar} ${displayName}: ${comment.body}</p>
-</li>`;
-    })
-    .join("")}
-</ul>`;
+export function createSingleCommentHtml(comment, capitalizeFirstLetter) {
+  const commentAuthor = comment.author || {};
+  const commentAuthorName = commentAuthor.name || "Anonymous";
+  const displayName = capitalizeFirstLetter(commentAuthorName);
+  const commentAuthorAvatar = commentAuthor.avatar ? `<img src="${commentAuthor.avatar}" alt="${displayName}" class="author-avatar rounded-circle"/>` : "";
+  return `<li class="mb-2"><p>${commentAuthorAvatar} ${displayName}: ${comment.body}</p></li>`;
+}
+
+export function renderComments(comments, commentsListElement, capitalizeFirstLetter) {
+  comments.forEach((comment) => {
+    commentsListElement.innerHTML += createSingleCommentHtml(comment, capitalizeFirstLetter);
+  });
 }
 
 export function createReactionsHtml(reactions) {

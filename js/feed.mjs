@@ -21,11 +21,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     renderPosts(posts, "postContainer");
 
-    //Call filter function
-    addFilterEventListener(posts, renderPosts);
+    if (document.body.hasAttribute("data-feed-page")) {
+      //Call filter function
+      addFilterEventListener(posts, renderPosts);
 
-    //Call search function
-    addSearchEventListener(posts, renderPosts);
+      //Call search function
+      addSearchEventListener(posts, renderPosts);
+    }
   } catch (error) {
     console.error(error.message);
   }

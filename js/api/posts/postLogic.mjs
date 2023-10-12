@@ -1,7 +1,8 @@
 import { viewPost } from "../../feed.mjs";
 import { formatDate } from "../../utilities/date-formatter.mjs";
 import { capitalizeFirstLetter } from "../../utilities/text-utils.mjs";
-import { createAuthorHtml, createAvatarHtml, createImageHtml, createCommentHtml, createReactionsHtml, createBodyHtml } from "./postHtmlCreate.mjs";
+import { createAuthorHtml, createImageHtml, createSingleCommentHtml, renderComments, createReactionsHtml, createBodyHtml } from "./postHtmlCreate.mjs";
+import { createCommentForm } from "./react_comment/comment-logic.mjs";
 
 export function createPostElement(post) {
   const {
@@ -22,17 +23,28 @@ export function createPostElement(post) {
 
   // Create post element
   const postElement = document.createElement("div");
+  postElement.id = `post-${id}`;
   postElement.classList.add("post", "card", "mb-3", "relative-position");
 
   // Getting HTML
   const imageHTML = createImageHtml(media, title);
   const authorHTML = createAuthorHtml(authorName, authorAvatar);
-  const commentsHTML = createCommentHtml(comments, capitalizeFirstLetter);
   const reactionsHTML = createReactionsHtml(reactions);
-  const bodyHTML = createBodyHtml(title, body, authorHTML, createdDateString, updatedDateString, commentsHTML, reactionsHTML);
+  const bodyHTML = createBodyHtml(title, body, authorHTML, createdDateString, updatedDateString);
 
-  postElement.innerHTML = imageHTML + bodyHTML + `<div class="card-footer">${commentsHTML}${reactionsHTML}</div>`;
-  postElement.addEventListener("click", () => viewPost(id));
+  postElement.innerHTML =
+    imageHTML +
+    bodyHTML +
+    `<div class="card-footer">
+    <ul class="comments-list"></ul>
+    ${reactionsHTML}
+  </div>`;
 
+  postElement.querySelector(".card-body").addEventListener("click", () => viewPost(id));
+
+  const commentForm = createCommentForm(id);
+  postElement.querySelector(".card-footer").appendChild(commentForm);
+  const commentsListElement = postElement.querySelector(".comments-list");
+  renderComments(comments, commentsListElement, capitalizeFirstLetter);
   return postElement;
 }
