@@ -1,7 +1,7 @@
 import { deletePost, updateLocalStorageDeleted } from "../delete-posts/delete-post.mjs";
 import { toggleEditForm } from "../edit-posts/edit-post.mjs";
 import { handleEditFormSubmission } from "../edit-posts/post-ui-updates.mjs";
-import { createPostElement } from "../render-posts.mjs";
+import { createPostElement } from "../postLogic.mjs";
 
 /**
  * Function for rendering new post

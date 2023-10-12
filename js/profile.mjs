@@ -1,5 +1,5 @@
-import { handleCreatePostSubmission } from "./api/posts/new-posts/create-post.mjs";
-import { renderMyPost, savePost } from "./api/posts/new-posts/render-new-post.mjs";
+import { handleCreatePostSubmission } from "./api/posts/profile-posts/create-post.mjs";
+import { renderMyPost, savePost } from "./api/posts/profile-posts/render-new-post.mjs";
 import { fetchUserPosts } from "./api/posts/profile-posts/fetch-user-posts.mjs";
 import { loadAndDisplayUserName } from "./utilities/user.mjs";
 import "./api/login_signup/logout.mjs";
