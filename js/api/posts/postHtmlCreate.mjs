@@ -3,7 +3,7 @@ export function createImageHtml(media, title) {
 }
 
 export function createAvatarHtml(authorAvatar, authorName) {
-  return authorAvatar ? `<img src="${authorAvatar}" alt="${authorName}" class="author-avatar rounded-circle"/>` : "";
+  return authorAvatar ? `<img src="${authorAvatar}" alt="${authorName}" class="author-avatar rounded-circle" onerror="this.style.display='none'"/>` : "";
 }
 
 export function createAuthorHtml(name, avatar) {
