@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../utilities/base-url.mjs";
+import { displayError } from "../../utilities/error-handler.mjs";
 
 const loginForm = document.getElementById("loginForm");
 const loginEmail = document.getElementById("loginEmail");
@@ -35,9 +36,8 @@ export async function loginUser() {
       },
     });
 
-    console.log(response);
-
     if (!response.ok) {
+      displayError(`Failed to login. Please try again later.`);
       throw new Error(`HTTP error. Status: ${response.status}`);
     }
 
@@ -70,11 +70,10 @@ loginForm.addEventListener("submit", function (event) {
   loginUser();
 });
 
-/*
 // Check if user is already logged in by checking token in localStorage
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("jwtToken");
   if (token) {
     window.location.href = "/profile/index.html";
   }
-});*/
+});

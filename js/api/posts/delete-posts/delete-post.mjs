@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Deletes post via API.
@@ -25,9 +26,9 @@ export async function deletePost(postId) {
 
   if (!response.ok) {
     console.error("Post deletion failed:", response);
+    displayError(`Failed to delete. Please try again later.`);
     throw new Error(`HTTP error. Status: ${response.status}`);
   }
-  console.log("Post deletion succeeded:", response);
 }
 
 /**

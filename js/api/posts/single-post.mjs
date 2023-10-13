@@ -1,10 +1,16 @@
 import { fetchSinglePost } from "./fetch-posts.mjs";
 import { renderSinglePost } from "./render-posts.mjs";
+import { displayError } from "../../utilities/error-handler.mjs";
+
+/**
+ * Event listener that triggers on DOM content loaded.
+ * Fetches and renders a single post based on 'postId' URL parameter.
+ */
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Extract postId from URL parameters
-
-  const postId = new URLSearchParams(window.location.search).get("postId");
+  const { search } = window.location;
+  const postId = new URLSearchParams(search).get("postId");
 
   if (postId) {
     try {
@@ -16,13 +22,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       const post = await fetchSinglePost(postId, token);
-      document.getElementById("singlePostContainer");
+      const singlePostContainer = document.getElementById("singlePostContainer");
 
-      renderSinglePost(post, "singlePostContainer");
+      renderSinglePost(post, singlePostContainer.id);
     } catch (error) {
       console.error("Failed to render specific post", error);
+      displayError(`Failed to load the post. Please try again later.`);
     }
   } else {
     console.error("postId not found in the URL");
+    displayError(`Failed to load the post. Please try again later.`);
   }
 });

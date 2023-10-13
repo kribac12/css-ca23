@@ -1,7 +1,9 @@
 import { deletePost, updateLocalStorageDeleted } from "../delete-posts/delete-post.mjs";
 import { toggleEditForm } from "../edit-posts/edit-post.mjs";
 import { handleEditFormSubmission } from "../edit-posts/post-ui-updates.mjs";
-import { createPostElement } from "../render-posts.mjs";
+import { createPostElement } from "../postLogic.mjs";
+import { handleEditSubmit } from "../edit-posts/edit-post.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Function for rendering new post
@@ -18,10 +20,6 @@ export async function renderMyPost(postData) {
     const { id, title, body, media } = postData;
     const postElement = createPostElement(postData);
 
-    const titleElement = postElement.querySelector(".post-title");
-    const bodyElement = postElement.querySelector(".post-body");
-    const mediaElement = postElement.querySelector(".post-media");
-
     // Creating elements and setting functionality
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -31,7 +29,7 @@ export async function renderMyPost(postData) {
     deleteButton.className = "btn btn-secondary m-4";
 
     // Creating and handling edit form and delete
-    const editForm = createEditForm(title, body, media, id, handleEditFormSubmission, titleElement, bodyElement, mediaElement);
+    const editForm = createEditForm(title, body, media, id, handleEditSubmit);
     editButton.addEventListener("click", function (event) {
       event.stopPropagation();
       toggleEditForm(editForm);
@@ -52,6 +50,7 @@ export async function renderMyPost(postData) {
     createDeleteModal(postData.id, postElement); // modal for the delete action
   } catch (error) {
     console.error("Error rendering post:", error);
+    displayError(`Failed to load the post. Please try again later.`);
   }
 }
 
@@ -68,7 +67,7 @@ export async function renderMyPost(postData) {
  * @returns {HTMLFormElement} - The edit form created.
  */
 
-function createEditForm(title, body, media, postId, submitHandler, titleElement, bodyElement, mediaElement) {
+function createEditForm(title, body, media, postId, submitHandler) {
   const editForm = document.createElement("form");
   const editTitle = document.createElement("input");
   const editBody = document.createElement("textarea");
@@ -78,13 +77,16 @@ function createEditForm(title, body, media, postId, submitHandler, titleElement,
   editTitle.type = "text";
   editTitle.name = "title";
   editTitle.value = title;
+  editTitle.classList.add("post-title");
 
   editBody.name = "body";
   editBody.value = body;
+  editBody.classList.add("post-body");
 
   editMedia.type = "url";
   editMedia.name = "media";
   editMedia.value = media || "";
+  editMedia.classList.add("post-media");
 
   saveButton.textContent = "Save";
 
@@ -104,8 +106,8 @@ function createEditForm(title, body, media, postId, submitHandler, titleElement,
     event.preventDefault();
     event.stopPropagation();
     console.log("Form submission prevented, propagation stopped.");
-    console.log("Parameters before calling submitHandler", event, postId, titleElement, bodyElement, mediaElement);
-    submitHandler(event, postId, titleElement, bodyElement, mediaElement);
+    console.log("Parameters before calling submitHandler", event, postId);
+    submitHandler(event, postId, editTitle, editBody, editMedia);
   };
 
   return editForm;
@@ -201,6 +203,7 @@ function createDeleteModal(postId, postElement) {
       console.log("Your post was deleted.");
     } catch (error) {
       console.error("There was an error deleting post:", error);
+      displayError(`Failed to delete the post. Please try again later.`);
     }
   };
 }

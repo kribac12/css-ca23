@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../../utilities/base-url.mjs";
-
+import { displayError } from "../../utilities/error-handler.mjs";
 /**
  * Fetches posts from API
  * @async
@@ -35,6 +35,7 @@ export async function fetchPosts() {
     return posts;
   } catch (error) {
     console.error("Failed to fetch the post feed", error);
+    displayError(`Failed to load post feed. Please try again.`);
     return null;
   }
 }
@@ -55,7 +56,8 @@ export async function fetchSinglePost(postId, token) {
     const post = await response.json();
     return post;
   } catch (error) {
-    console.error(`Failed to fetch post ${postId}`, error);
+    console.error(error);
+    displayError(`Failed to load post. Please try again.`);
     throw error;
   }
 }

@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../utilities/base-url.mjs";
+import { displayError } from "../../utilities/error-handler.mjs";
 
 const registerForm = document.getElementById("registerForm");
 
@@ -32,6 +33,7 @@ export async function registerUser() {
     });
 
     if (!response.ok) {
+      displayError(`Failed to register. Please try again later.`);
       throw new Error(`HTTP error. Status: ${response.status}`);
     }
 
@@ -45,6 +47,7 @@ export async function registerUser() {
     localStorage.setItem("registeredUser", JSON.stringify(newUser));
   } catch (error) {
     console.error("Registration failed", error);
+
     //Display error message in HTML
     document.getElementById("registerMessage").innerText = `Registration failed: ${error}`;
   }
