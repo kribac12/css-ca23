@@ -18,8 +18,8 @@ import { updatePost } from "./edit-post.mjs";
  * @throws {Error}
  */
 
-export async function handleEditFormSubmission(event, postId, titleElement, bodyElement, mediaElement) {
-  console.log("Parameters inside handleEditFormSubmission:", event, postId, titleElement, bodyElement, mediaElement);
+export async function handleEditFormSubmission(event, postId) {
+  console.log("Parameters inside handleEditFormSubmission:", event, postId);
   event.preventDefault();
   const { title, body, media } = event.target.elements;
 
@@ -33,7 +33,7 @@ export async function handleEditFormSubmission(event, postId, titleElement, body
     const updatedPost = await updatePost(postId, title.value, body.value, media.value);
     console.log(updatedPost);
 
-    updateUIWithPostData(updatedPost, titleElement, bodyElement, mediaElement);
+    updateUIWithPostData(updatedPost, title, body, media);
     updateLocalStorageWithPostData(updatedPost);
 
     console.log("Post updated successfully.");
@@ -53,16 +53,16 @@ export async function handleEditFormSubmission(event, postId, titleElement, body
  * @returns {void}
  */
 
-function updateUIWithPostData(updatedPost, titleElement, bodyElement, mediaElement) {
-  if (!titleElement || !bodyElement || !mediaElement) {
-    console.error("Title or body element is null:", titleElement, bodyElement);
+function updateUIWithPostData(updatedPost, title, body, media) {
+  if (!title || !body || !media) {
+    console.error("Title or body element is null:", title, body);
   }
   console.log(updatedPost);
-  titleElement.textContent = updatedPost.title;
-  bodyElement.textContent = updatedPost.body;
-  if (mediaElement && updatedPost.media) {
-    mediaElement.src = updatedPost.media;
-  } else if (!mediaElement && updatedPost.media) {
+  title.textContent = updatedPost.title;
+  body.textContent = updatedPost.body;
+  if (media && updatedPost.media) {
+    media.src = updatedPost.media;
+  } else if (!media && updatedPost.media) {
     console.error("Media element is null but post has media data:", updatedPost.media);
   }
 }
