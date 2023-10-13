@@ -1,5 +1,20 @@
 import { commentOnPost } from "./comment-API.mjs";
 
+/**
+ * Creates and returns comment form element.
+ * Attaches event listener to handle comment posting.
+ *
+ * @function
+ * @export
+ * @param {string} postId - Id of the post to create the comment form.
+ * @returns {HTMLFormElement} Form element to be appended to the DOM.
+ * @example
+ *
+ * ```js
+ * const commentForm = createCommentForm('hellohello');
+ * document.querySelector('#comment-section').appendChild(commentForm);
+ * ```
+ */
 export function createCommentForm(postId) {
   const form = document.createElement("form");
   const input = document.createElement("input");
@@ -37,6 +52,14 @@ export function createCommentForm(postId) {
   return form;
 }
 
+/**
+ * Creates and returns HTML list item element with comment.
+ *
+ * @function
+ * @param {Object} comment - Comment object containing 'body' property with text content.
+ * @param {string} comment.body - Text content of the comment.
+ * @returns {HTMLElement} HTML li element containing comment,to be appended to DOM.
+ */
 function createCommentElement(comment) {
   const commentElement = document.createElement("li");
   commentElement.innerText = comment.body;

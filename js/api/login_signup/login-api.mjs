@@ -70,11 +70,10 @@ loginForm.addEventListener("submit", function (event) {
   loginUser();
 });
 
-/*
 // Check if user is already logged in by checking token in localStorage
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("jwtToken");
   if (token) {
     window.location.href = "/profile/index.html";
   }
-});*/
+});
