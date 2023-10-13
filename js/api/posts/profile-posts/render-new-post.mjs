@@ -18,13 +18,6 @@ export async function renderMyPost(postData) {
     const { id, title, body, media } = postData;
     const postElement = createPostElement(postData);
 
-    const titleElement = postElement.querySelector(".post-title");
-    const bodyElement = postElement.querySelector(".post-body");
-    const mediaElement = postElement.querySelector(".post-media");
-
-    console.log(titleElement);
-    console.log("SEE HERE!!");
-
     // Creating elements and setting functionality
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -34,7 +27,7 @@ export async function renderMyPost(postData) {
     deleteButton.className = "btn btn-secondary m-4";
 
     // Creating and handling edit form and delete
-    const editForm = createEditForm(title, body, media, id, handleEditFormSubmission, titleElement, bodyElement, mediaElement);
+    const editForm = createEditForm(title, body, media, id, handleEditFormSubmission);
     editButton.addEventListener("click", function (event) {
       event.stopPropagation();
       toggleEditForm(editForm);
@@ -71,7 +64,7 @@ export async function renderMyPost(postData) {
  * @returns {HTMLFormElement} - The edit form created.
  */
 
-function createEditForm(title, body, media, postId, submitHandler, titleElement, bodyElement, mediaElement) {
+function createEditForm(title, body, media, postId, submitHandler) {
   const editForm = document.createElement("form");
   const editTitle = document.createElement("input");
   const editBody = document.createElement("textarea");
@@ -81,13 +74,16 @@ function createEditForm(title, body, media, postId, submitHandler, titleElement,
   editTitle.type = "text";
   editTitle.name = "title";
   editTitle.value = title;
+  editTitle.classList.add("post-title");
 
   editBody.name = "body";
   editBody.value = body;
+  editBody.classList.add("post-body");
 
   editMedia.type = "url";
   editMedia.name = "media";
   editMedia.value = media || "";
+  editMedia.classList.add("post-media");
 
   saveButton.textContent = "Save";
 
@@ -107,8 +103,8 @@ function createEditForm(title, body, media, postId, submitHandler, titleElement,
     event.preventDefault();
     event.stopPropagation();
     console.log("Form submission prevented, propagation stopped.");
-    console.log("Parameters before calling submitHandler", event, postId, titleElement, bodyElement, mediaElement);
-    submitHandler(event, postId, titleElement, bodyElement, mediaElement);
+    console.log("Parameters before calling submitHandler", event, postId);
+    submitHandler(event, postId, editTitle, editBody, editMedia);
   };
 
   return editForm;
