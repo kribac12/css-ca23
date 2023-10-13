@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Create new post by sending POST request to the API.
@@ -39,6 +40,7 @@ export async function createPost(title, body, media) {
     return newPost;
   } catch (error) {
     console.error("Failed creating post:", error);
+    displayError(`Failed to create post. Please try again later.`);
     throw error;
   }
 }
@@ -75,6 +77,7 @@ export async function handleCreatePostSubmission(formElement, onPostCreated) {
       }
     } catch (error) {
       console.error("Error:", error);
+      displayError(`Failed to create the post. Please try again later.`);
     }
   });
 }

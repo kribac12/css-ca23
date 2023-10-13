@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 export async function fetchUserPosts(userName) {
   try {
@@ -21,5 +22,6 @@ export async function fetchUserPosts(userName) {
     return posts;
   } catch (error) {
     console.error("Failed to fetch posts", error);
+    displayError(`Failed to load the posts. Please try again later.`);
   }
 }

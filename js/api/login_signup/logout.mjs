@@ -1,4 +1,4 @@
-//Logout function
+import { displayError } from "../../utilities/error-handler.mjs";
 
 const logoutLink = document.querySelector(".logoutLink");
 console.log("Logout link:", logoutLink);
@@ -29,4 +29,5 @@ if (logoutLink) {
   logoutLink.addEventListener("click", logoutUser);
 } else {
   console.error("Logout link not found");
+  displayError(`Failed to log out. Please try again later.`);
 }

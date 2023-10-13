@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Sends comment to a post using API.
@@ -33,13 +34,14 @@ export async function commentOnPost(postId, commentText) {
 
     if (!response.ok) {
       const responseBody = await response.clone().json();
-      console.log("Response:", responseBody);
+
       throw new Error(`HTTP error. Status:${response.status}`);
     }
 
     return await response.json();
   } catch (error) {
     console.error(`Failed to comment on post ${postId}`, error);
+    displayError(`Failed to comment on the post. Please try again later.`);
     throw error;
   }
 }

@@ -41,6 +41,7 @@ export function createPostElement(post) {
   </div>`;
 
   postElement.querySelector(".card-body").addEventListener("click", () => viewPost(id));
+  postElement.querySelector(".post-image")?.addEventListener("click", () => viewPost(id));
 
   const commentForm = createCommentForm(id);
   postElement.querySelector(".card-footer").appendChild(commentForm);

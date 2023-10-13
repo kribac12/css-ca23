@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../utilities/base-url.mjs";
+import { displayError } from "../../utilities/error-handler.mjs";
 
 const loginForm = document.getElementById("loginForm");
 const loginEmail = document.getElementById("loginEmail");
@@ -36,6 +37,7 @@ export async function loginUser() {
     });
 
     if (!response.ok) {
+      displayError(`Failed to login. Please try again later.`);
       throw new Error(`HTTP error. Status: ${response.status}`);
     }
 

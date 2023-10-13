@@ -3,6 +3,7 @@ import { toggleEditForm } from "../edit-posts/edit-post.mjs";
 import { handleEditFormSubmission } from "../edit-posts/post-ui-updates.mjs";
 import { createPostElement } from "../postLogic.mjs";
 import { handleEditSubmit } from "../edit-posts/edit-post.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Function for rendering new post
@@ -49,6 +50,7 @@ export async function renderMyPost(postData) {
     createDeleteModal(postData.id, postElement); // modal for the delete action
   } catch (error) {
     console.error("Error rendering post:", error);
+    displayError(`Failed to load the post. Please try again later.`);
   }
 }
 
@@ -201,6 +203,7 @@ function createDeleteModal(postId, postElement) {
       console.log("Your post was deleted.");
     } catch (error) {
       console.error("There was an error deleting post:", error);
+      displayError(`Failed to delete the post. Please try again later.`);
     }
   };
 }

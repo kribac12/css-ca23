@@ -1,5 +1,12 @@
-// Function to navigate to register tab
-
+/**
+ * Hides login form, displays register form.
+ * Manages active tab styles.
+ *
+ * @function
+ * @example
+ * // Use in event listeners or other function calls.
+ * switchToRegister();
+ */
 function switchToRegister() {
   const loginForm = document.getElementById("loginForm");
   const registerForm = document.getElementById("registerForm");
@@ -11,8 +18,15 @@ function switchToRegister() {
   activateTab("registerTab", "loginTab");
 }
 
-// Function to navigate to login tab
-
+/**
+ * Hides register form, displays login form.
+ * Manages active tab styles.
+ *
+ * @function
+ * @example
+ * // Use in event listeners or other function calls.
+ * switchToLogin();
+ */
 function switchToLogin() {
   const loginForm = document.getElementById("loginForm");
   const registerForm = document.getElementById("registerForm");
@@ -24,13 +38,25 @@ function switchToLogin() {
   activateTab("loginTab", "registerTab");
 }
 
-// Function to manage active tab style
+/**
+ * Adds active class to specified tab, removes it from the other tab.
+ *
+ * @function
+ * @param {string} activeTabId
+ * @param {string} inactiveTabId
+ * @example
+ * activateTab('loginTab', 'registerTab');
+ */
 
 function activateTab(activeTabId, inactiveTabId) {
   document.getElementById(activeTabId).classList.add("active");
   document.getElementById(inactiveTabId).classList.remove("active");
 }
-// Add event listeners to the login and register tabs
+
+/**
+ * Event listener that triggers on DOM content loaded.
+ * Initializes tab navigation and default visibility of the forms.
+ */
 
 document.addEventListener("DOMContentLoaded", function () {
   const loginTab = document.getElementById("loginTab");

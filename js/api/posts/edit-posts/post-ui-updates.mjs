@@ -1,4 +1,5 @@
 import { updatePost } from "./edit-post.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Handles form submission for editing a post.
@@ -41,6 +42,7 @@ export async function handleEditFormSubmission(event, postId) {
     event.target.style.display = "none";
   } catch (error) {
     console.error("Error updating post:", error);
+    displayError(`Error updating post. Please try again later.`);
   }
 }
 

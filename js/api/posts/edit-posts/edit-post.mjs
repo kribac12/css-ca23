@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Toggles the display of form element for editing.
@@ -33,6 +34,7 @@ export async function handleEditSubmit(event, postId) {
     const updatedPost = await updatePost(postId, title.value, body.value, media.value);
   } catch (error) {
     console.error("Error updating post:", error);
+    displayError(`Failed to edit the post. Please try again later.`);
   }
 }
 
@@ -79,6 +81,7 @@ export async function updatePost(postId, title, body, media) {
     return updatedPost;
   } catch (error) {
     console.error("Failed updating post:", error);
+    displayError(`Failed to edit the post. Please try again later.`);
     throw error;
   }
 }

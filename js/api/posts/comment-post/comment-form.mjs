@@ -1,5 +1,6 @@
 import { commentOnPost } from "./comment-API.mjs";
 import { createCommentElement } from "./comment-element.mjs";
+import { displayError } from "../../../utilities/error-handler.mjs";
 
 /**
  * Creates and returns comment form element.
@@ -47,6 +48,7 @@ export function createCommentForm(postId) {
       input.value = "";
     } catch (error) {
       console.error("Failed to post comment", error);
+      displayError(`Failed to post comment. Please try again later.`);
     }
   });
   return form;
