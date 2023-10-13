@@ -2,7 +2,7 @@ import { viewPost } from "../../feed.mjs";
 import { formatDate } from "../../utilities/date-formatter.mjs";
 import { capitalizeFirstLetter } from "../../utilities/text-utils.mjs";
 import { createAuthorHtml, createImageHtml, createSingleCommentHtml, renderComments, createReactionsHtml, createBodyHtml } from "./postHtmlCreate.mjs";
-import { createCommentForm } from "./comment-post/comment-logic.mjs";
+import { createCommentForm } from "./comment-post/comment-form.mjs";
 
 export function createPostElement(post) {
   const {

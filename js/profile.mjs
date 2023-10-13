@@ -19,7 +19,6 @@ handleCreatePostSubmission(createPostForm, async (newPost) => {
   try {
     await renderMyPost(newPost);
     savePost(newPost);
-    console.log("New post rendered:", newPost);
   } catch (error) {
     console.error("Error rendering new post:", error);
   }

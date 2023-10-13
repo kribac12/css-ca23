@@ -2,6 +2,7 @@ import { deletePost, updateLocalStorageDeleted } from "../delete-posts/delete-po
 import { toggleEditForm } from "../edit-posts/edit-post.mjs";
 import { handleEditFormSubmission } from "../edit-posts/post-ui-updates.mjs";
 import { createPostElement } from "../postLogic.mjs";
+import { handleEditSubmit } from "../edit-posts/edit-post.mjs";
 
 /**
  * Function for rendering new post
@@ -27,7 +28,7 @@ export async function renderMyPost(postData) {
     deleteButton.className = "btn btn-secondary m-4";
 
     // Creating and handling edit form and delete
-    const editForm = createEditForm(title, body, media, id, handleEditFormSubmission);
+    const editForm = createEditForm(title, body, media, id, handleEditSubmit);
     editButton.addEventListener("click", function (event) {
       event.stopPropagation();
       toggleEditForm(editForm);

@@ -1,4 +1,5 @@
 import { commentOnPost } from "./comment-API.mjs";
+import { createCommentElement } from "./comment-element.mjs";
 
 /**
  * Creates and returns comment form element.
@@ -31,15 +32,14 @@ export function createCommentForm(postId) {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     try {
-      const comment = await commentOnPost(postId, input.value);
+      const { value: commentText } = input;
+      const comment = await commentOnPost(postId, commentText);
 
       const newCommentElement = createCommentElement(comment);
       const commentContainer = document.querySelector(`#post-${postId} .comments-list`);
 
       if (!commentContainer) {
         console.error(`No comment container found for post ${postId}`);
-        console.log("Post element:", document.querySelector(`#post-${postId}`));
-        console.log("HTML:", document.documentElement.innerHTML);
         return;
       }
       commentContainer.appendChild(newCommentElement);
@@ -50,18 +50,4 @@ export function createCommentForm(postId) {
     }
   });
   return form;
-}
-
-/**
- * Creates and returns HTML list item element with comment.
- *
- * @function
- * @param {Object} comment - Comment object containing 'body' property with text content.
- * @param {string} comment.body - Text content of the comment.
- * @returns {HTMLElement} HTML li element containing comment,to be appended to DOM.
- */
-function createCommentElement(comment) {
-  const commentElement = document.createElement("li");
-  commentElement.innerText = comment.body;
-  return commentElement;
 }
