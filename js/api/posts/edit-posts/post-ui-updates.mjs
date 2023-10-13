@@ -56,7 +56,6 @@ export async function handleEditFormSubmission(event, postId, titleElement, body
 function updateUIWithPostData(updatedPost, titleElement, bodyElement, mediaElement) {
   if (!titleElement || !bodyElement || !mediaElement) {
     console.error("Title or body element is null:", titleElement, bodyElement);
-    return;
   }
   console.log(updatedPost);
   titleElement.textContent = updatedPost.title;

@@ -22,6 +22,9 @@ export async function renderMyPost(postData) {
     const bodyElement = postElement.querySelector(".post-body");
     const mediaElement = postElement.querySelector(".post-media");
 
+    console.log(titleElement);
+    console.log("SEE HERE!!");
+
     // Creating elements and setting functionality
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
