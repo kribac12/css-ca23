@@ -24,20 +24,15 @@ export async function handleEditFormSubmission(event, postId) {
   event.preventDefault();
   const { title, body, media } = event.target.elements;
 
-  console.log("Form elements:", { title, body, media });
-
   if (!title || !body || !media) {
     console.error("Form input(s) not found:", { title, body, media });
     return;
   }
   try {
     const updatedPost = await updatePost(postId, title.value, body.value, media.value);
-    console.log(updatedPost);
 
     updateUIWithPostData(updatedPost, title, body, media);
     updateLocalStorageWithPostData(updatedPost);
-
-    console.log("Post updated successfully.");
 
     event.target.style.display = "none";
   } catch (error) {

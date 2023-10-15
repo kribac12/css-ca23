@@ -77,18 +77,19 @@ function createEditForm(title, body, media, postId, submitHandler) {
   editTitle.type = "text";
   editTitle.name = "title";
   editTitle.value = title;
-  editTitle.classList.add("post-title");
+  editTitle.classList.add("post-title", "form-control");
 
   editBody.name = "body";
   editBody.value = body;
-  editBody.classList.add("post-body");
+  editBody.classList.add("post-body", "form-control");
 
   editMedia.type = "url";
   editMedia.name = "media";
   editMedia.value = media || "";
-  editMedia.classList.add("post-media");
+  editMedia.classList.add("post-media", "form-control");
 
   saveButton.textContent = "Save";
+  saveButton.classList.add("btn", "btn-primary");
 
   editForm.appendChild(editTitle);
   editForm.appendChild(editBody);
@@ -105,8 +106,7 @@ function createEditForm(title, body, media, postId, submitHandler) {
   editForm.onsubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log("Form submission prevented, propagation stopped.");
-    console.log("Parameters before calling submitHandler", event, postId);
+
     submitHandler(event, postId, editTitle, editBody, editMedia);
   };
 
@@ -196,11 +196,10 @@ function createDeleteModal(postId, postElement) {
     console.log(`Trying to delete a post with ID: ${postId}`);
     try {
       await deletePost(postId);
-      console.log(deletePost);
+
       postElement.remove();
       updateLocalStorageDeleted(postId);
       modal.bsModal.hide();
-      console.log("Your post was deleted.");
     } catch (error) {
       console.error("There was an error deleting post:", error);
       displayError(`Failed to delete the post. Please try again later.`);
@@ -214,6 +213,6 @@ function createDeleteModal(postId, postElement) {
  */
 function showDeleteModal(postId) {
   const modal = document.getElementById(`deleteModal${postId}`);
-  console.log(modal);
+
   modal.bsModal.show();
 }

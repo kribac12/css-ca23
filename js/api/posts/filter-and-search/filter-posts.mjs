@@ -39,6 +39,5 @@ export function addFilterEventListener(posts, renderPosts) {
     }
 
     renderPosts(filteredPosts, "postContainer");
-    console.log("Filtered posts:", filteredPosts);
   });
 }

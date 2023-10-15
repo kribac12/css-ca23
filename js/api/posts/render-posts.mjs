@@ -12,7 +12,7 @@ export function renderSinglePost(post, containerId) {
 
 export async function renderPosts(posts, containerId) {
   const postContainer = document.getElementById(containerId);
-  console.log("Post container:", postContainer);
+
   if (!postContainer || !posts) return;
 
   postContainer.innerHTML = "";
