@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 import { displayError } from "../../../utilities/error-handler.mjs";
+import { createPostElement } from "../postLogic.mjs";
 
 /**
  * Toggles the display of form element for editing.
@@ -11,7 +12,6 @@ import { displayError } from "../../../utilities/error-handler.mjs";
  */
 export function toggleEditForm(formElement) {
   formElement.style.display = formElement.style.display === "none" ? "block" : "none";
-  console.log(formElement);
 }
 
 /**
@@ -32,6 +32,21 @@ export async function handleEditSubmit(event, postId) {
 
   try {
     const updatedPost = await updatePost(postId, title.value, body.value, media.value);
+
+    const container = document.querySelector("#myPostsContainer");
+    const containerChildren = [...container.childNodes];
+
+    //Filter out edited posts from containerChildren
+    const filteredPosts = containerChildren.filter((post) => Number(post.id.split("-")[1]) !== postId);
+
+    container.innerHTML = "";
+
+    // Re-render all posts in filteredPosts back to container
+    filteredPosts.forEach((post) => container.appendChild(post));
+
+    // Create and append newly edited post to the container.
+    const postElement = createPostElement(updatedPost);
+    container.appendChild(postElement);
   } catch (error) {
     console.error("Error updating post:", error);
     displayError(`Failed to edit the post. Please try again later.`);
