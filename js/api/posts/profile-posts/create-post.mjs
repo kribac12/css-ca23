@@ -69,7 +69,6 @@ export async function handleCreatePostSubmission(formElement, onPostCreated) {
 
     try {
       const newPost = await createPost(title.value, body.value, media.value);
-      console.log("Post added:", newPost);
 
       if (typeof onPostCreated === "function") {
         onPostCreated(newPost);

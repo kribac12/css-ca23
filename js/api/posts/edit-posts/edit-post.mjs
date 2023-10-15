@@ -92,7 +92,7 @@ export async function updatePost(postId, title, body, media) {
     }
 
     const updatedPost = await response.json();
-    console.log("Updated Post:", updatedPost);
+
     return updatedPost;
   } catch (error) {
     console.error("Failed updating post:", error);

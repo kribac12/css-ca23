@@ -107,7 +107,6 @@ function createEditForm(title, body, media, postId, submitHandler) {
     event.preventDefault();
     event.stopPropagation();
 
-    console.log("Parameters before calling submitHandler", event, postId);
     submitHandler(event, postId, editTitle, editBody, editMedia);
   };
 
