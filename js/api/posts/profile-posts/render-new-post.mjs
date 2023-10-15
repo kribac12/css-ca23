@@ -77,18 +77,19 @@ function createEditForm(title, body, media, postId, submitHandler) {
   editTitle.type = "text";
   editTitle.name = "title";
   editTitle.value = title;
-  editTitle.classList.add("post-title");
+  editTitle.classList.add("post-title", "form-control");
 
   editBody.name = "body";
   editBody.value = body;
-  editBody.classList.add("post-body");
+  editBody.classList.add("post-body", "form-control");
 
   editMedia.type = "url";
   editMedia.name = "media";
   editMedia.value = media || "";
-  editMedia.classList.add("post-media");
+  editMedia.classList.add("post-media", "form-control");
 
   saveButton.textContent = "Save";
+  saveButton.classList.add("btn", "btn-primary");
 
   editForm.appendChild(editTitle);
   editForm.appendChild(editBody);
