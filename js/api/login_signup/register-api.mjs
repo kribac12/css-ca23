@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../../utilities/base-url.mjs";
 import { displayError } from "../../utilities/error-handler.mjs";
 import { makeApiRequest } from "../api-service.mjs";
 
@@ -35,8 +34,8 @@ export async function registerUser() {
   } catch (error) {
     console.error("Registration failed", error);
 
-    //Display error message in HTML
-    document.getElementById("registerMessage").innerText = `Registration failed: ${error}`;
+    //Display error message
+    displayError(`Registration failed: ${error.message}`);
   }
 }
 

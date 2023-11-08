@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 import { displayError } from "../../../utilities/error-handler.mjs";
 import { makeApiRequest } from "../../api-service.mjs";
 /**

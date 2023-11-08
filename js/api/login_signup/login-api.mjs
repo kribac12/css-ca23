@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../../utilities/base-url.mjs";
 import { displayError } from "../../utilities/error-handler.mjs";
 import { makeApiRequest } from "../api-service.mjs";
 
@@ -43,7 +42,7 @@ export async function loginUser() {
     }
   } catch (error) {
     console.error("Login failed", error);
-    document.getElementById("loginMessage").innerText = `Login failed: ${error}`;
+    displayError(`Login failed: ${error.message}`);
   }
 }
 
