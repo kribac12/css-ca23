@@ -1,5 +1,5 @@
-import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 import { displayError } from "../../../utilities/error-handler.mjs";
+import { makeApiRequest } from "../../api-service.mjs";
 
 /**
  * Create new post by sending POST request to the API.
@@ -23,20 +23,12 @@ export async function createPost(title, body, media) {
       throw new Error("Token not found");
     }
 
-    const response = await fetch(`${API_BASE_URL}/posts?_author=true&_comments=true&_reactions=true`, {
-      method: "POST",
-      body: JSON.stringify({ title, body, media }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    });
+    const postData = { title, body, media };
+    const headers = {
+      Authorization: `Bearer ${jwtToken}`,
+    };
 
-    if (!response.ok) {
-      throw new Error(`HTTP error. Status: ${response.status}`);
-    }
-
-    const newPost = await response.json();
+    const newPost = await makeApiRequest(`/posts`, "POST", postData, headers);
     return newPost;
   } catch (error) {
     console.error("Failed creating post:", error);
