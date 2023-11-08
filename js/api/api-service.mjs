@@ -1,11 +1,12 @@
 import { API_BASE_URL } from "../utilities/base-url.mjs";
 
-export async function makeApiRequest(path, method, body) {
+export async function makeApiRequest(path, method, body, extraHeaders = {}) {
   try {
     const options = {
       method: method,
       headers: {
         "Content-Type": "application/json",
+        ...extraHeaders,
       },
     };
 
