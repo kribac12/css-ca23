@@ -24,7 +24,7 @@ export async function commentOnPost(postId, commentText) {
 
     // Construct additional headers for authorization
     const headers = {
-      Authorization: "Bearer " + jwtToken,
+      Authorization: `Bearer ${jwtToken}`,
     };
 
     // Use makeApiRequest instead of fetch

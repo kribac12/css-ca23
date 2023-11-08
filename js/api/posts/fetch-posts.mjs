@@ -35,7 +35,7 @@ export async function fetchSinglePost(postId) {
   try {
     const token = localStorage.getItem("jwtToken");
     const headers = {
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${jwtToken}`,
     };
 
     return await makeApiRequest(`/posts/${postId}?_author=true&_comments=true&_reactions=true`, "GET", null, headers);
