@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "../utilities/base-url.mjs";
 
-export async function makeApiRequest(path, method, body, extraHeaders = {}) {
+export async function makeApiRequest(path, method, body = null, extraHeaders = {}) {
   try {
     const options = {
       method: method,
@@ -10,7 +10,7 @@ export async function makeApiRequest(path, method, body, extraHeaders = {}) {
       },
     };
 
-    if (body) {
+    if (body !== null) {
       options.body = JSON.stringify(body);
     }
 
