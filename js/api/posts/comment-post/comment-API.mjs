@@ -1,6 +1,5 @@
-import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 import { displayError } from "../../../utilities/error-handler.mjs";
-
+import { makeApiRequest } from "../../api-service.mjs";
 /**
  * Sends comment to a post using API.
  *
@@ -22,23 +21,13 @@ export async function commentOnPost(postId, commentText) {
   try {
     const jwtToken = localStorage.getItem("jwtToken");
 
-    const response = await fetch(`${API_BASE_URL}/posts/${postId}/comment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + jwtToken,
-      },
+    // Construct additional headers for authorization
+    const headers = {
+      Authorization: `Bearer ${jwtToken}`,
+    };
 
-      body: JSON.stringify({ body: commentText }),
-    });
-
-    if (!response.ok) {
-      const responseBody = await response.clone().json();
-
-      throw new Error(`HTTP error. Status:${response.status}`);
-    }
-
-    return await response.json();
+    // Use makeApiRequest instead of fetch
+    return await makeApiRequest(`/posts/${postId}/comment`, "POST", { body: commentText }, headers);
   } catch (error) {
     console.error(`Failed to comment on post ${postId}`, error);
     displayError(`Failed to comment on the post. Please try again later.`);

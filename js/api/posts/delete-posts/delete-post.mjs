@@ -1,6 +1,5 @@
-import { API_BASE_URL } from "../../../utilities/base-url.mjs";
 import { displayError } from "../../../utilities/error-handler.mjs";
-
+import { makeApiRequest } from "../../api-service.mjs";
 /**
  * Deletes post via API.
  *
@@ -16,18 +15,19 @@ import { displayError } from "../../../utilities/error-handler.mjs";
  */
 
 export async function deletePost(postId) {
-  const jwtToken = localStorage.getItem("jwtToken");
-  if (!jwtToken) throw new Error("Token not found.");
+  try {
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) throw new Error("Token not found.");
 
-  const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true&_comments=true&_reactions=true`, {
-    method: "DELETE",
-    headers: { Authorization: `Bearer ${jwtToken}` },
-  });
+    const headers = {
+      Authorization: `Bearer ${jwtToken}`,
+    };
 
-  if (!response.ok) {
-    console.error("Post deletion failed:", response);
-    displayError(`Failed to delete. Please try again later.`);
-    throw new Error(`HTTP error. Status: ${response.status}`);
+    await makeApiRequest(`/posts/${postId}`, "DELETE", null, headers);
+  } catch (error) {
+    console.error("Post deletion failed:", error);
+    displayError(`Failed tp delete. Please try again.`);
+    throw error;
   }
 }
 

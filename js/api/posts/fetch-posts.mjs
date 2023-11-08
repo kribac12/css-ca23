@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../../utilities/base-url.mjs";
 import { displayError } from "../../utilities/error-handler.mjs";
+import { makeApiRequest } from "../api-service.mjs";
 /**
  * Fetches posts from API
  * @async
@@ -16,23 +17,13 @@ export async function fetchPosts() {
       window.location.href = "/index.html";
       return;
     }
+
+    const headers = {
+      Authorization: "Bearer " + token,
+    };
+
     //Fetch post feed from API
-    const response = await fetch(`${API_BASE_URL}/posts?_author=true&_comments=true&_reactions=true`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    });
-
-    console.log(token);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error. Status: ${response.status}`);
-    }
-
-    const posts = await response.json();
-    return posts;
+    return await makeApiRequest("/posts?_author=true&_comments=true&_reactions=true", "GET", null, headers);
   } catch (error) {
     console.error("Failed to fetch the post feed", error);
     displayError(`Failed to load post feed. Please try again.`);
@@ -40,21 +31,14 @@ export async function fetchPosts() {
   }
 }
 
-export async function fetchSinglePost(postId, token) {
+export async function fetchSinglePost(postId) {
   try {
-    const response = await fetch(`${API_BASE_URL}/posts/${postId}?_author=true&_comments=true&_reactions=true`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    });
+    const token = localStorage.getItem("jwtToken");
+    const headers = {
+      Authorization: `Bearer ${jwtToken}`,
+    };
 
-    if (!response.ok) {
-      throw new Error(`HTTP error. Status:${response.status}`);
-    }
-    const post = await response.json();
-    return post;
+    return await makeApiRequest(`/posts/${postId}?_author=true&_comments=true&_reactions=true`, "GET", null, headers);
   } catch (error) {
     console.error(error);
     displayError(`Failed to load post. Please try again.`);
