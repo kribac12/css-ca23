@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../../utilities/base-url.mjs";
+import { makeApiRequest } from "../../api-service.mjs";
 import { displayError } from "../../../utilities/error-handler.mjs";
 
 export async function fetchUserPosts(userName) {
@@ -7,18 +7,11 @@ export async function fetchUserPosts(userName) {
     if (!token) {
       throw new Error("No authentication token found");
     }
-    const response = await fetch(`${API_BASE_URL}/profiles/${userName}/posts?_author=true&_comments=true&_reactions=true`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-    if (!response.ok) {
-      throw new Error(`HTTP error. Status: ${response.status}`);
-    }
-
-    const posts = await response.json();
+    const posts = await makeApiRequest(`/profiles/${userName}/posts?_author=true&_comments=true&_reactions=true`, "GET", null, headers);
     return posts;
   } catch (error) {
     console.error("Failed to fetch posts", error);
