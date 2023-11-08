@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FetchFriends sign in or register" />
+    <title>Single post</title>
+    <link rel="stylesheet" href="/dist/css/index.css" />
+    <script type="module" src="./js/api/posts/single-post.mjs"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body cz-shortcut-listen="true">
+    <div class="container">
+        <header>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Navbar">
+              <div class="container-fluid">
+                <a class="navbar-brand nav-logo m-3 fs-2 fw-bold" href="index.html">Gratitude</a>
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#hamburger-nav"
+                  aria-controls="hamburger-nav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+      
+                <div class="collapse navbar-collapse" id="hamburger-nav">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link hidden" aria-hidden="true" href="/feed/index.html">Feed</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link hidden" aria-hidden="true" href="/profile/index.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link logoutLink" href="/index.html">Logout</a>
+                    </li>
+                  </ul>
+               
+                </div>
+              </div>
+            </nav>
+          </div>
+      </header>
+    <main>
+
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+    
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 pt-3">
+<div id="singlePostContainer"></div>
+      </div>
+    </div>
+  </div>
+  
+    </main>
+
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</html>
