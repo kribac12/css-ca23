@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../../utilities/base-url.mjs";
 import { displayError } from "../../utilities/error-handler.mjs";
+import { makeApiRequest } from "../api-service.mjs";
 
 const loginForm = document.getElementById("loginForm");
 const loginEmail = document.getElementById("loginEmail");
@@ -26,22 +27,7 @@ export async function loginUser() {
       password,
     };
 
-    console.log(user);
-
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      displayError(`Failed to login. Please try again later.`);
-      throw new Error(`HTTP error. Status: ${response.status}`);
-    }
-
-    const json = await response.json();
+    const json = await makeApiRequest("/auth/login", "POST", user);
 
     const token = json.accessToken;
     const userName = json.name;
