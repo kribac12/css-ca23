@@ -1,22 +1,33 @@
-# JavaScript 2 - Course Assignment
+# FetchFriends
 
-Social media site.
-Using an API and API documentation with endpoints, I was to make create a site where users could view, post, edit and delete posts. 
+## JavaScript 2 - Course Assignment
 
-## Built with
+FetchFriends is a social media site where users can view, post, edit, and delete posts using a provided API and its documentation.
 
-Html, Bootstrap / Scss, JavaScript 
+## 🌟 Features
+- View posts
+- Create new posts
+- Edit existing posts
+- Delete posts
 
-## Installation and running
+## 🛠️ Built With
+- HTML
+- Bootstrap / SCSS
+- JavaScript
 
-Clone repo:
-git clone https://github.com/kribac12/css-ca23
+## 🚀 Installation and Running
 
-To run the app, run the following commands:
-
-npm run start
-npm run watch
-
-## Trello Board
-https://trello.com/b/24S7pEOp/javascript-2-ca
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/kribac12/css-ca23
+2. **Navigate to the project directory:**
+   ```bash 
+   cd css-ca23
+3. **Install dependencies:**
+   ```bash 
+   npm install
+4. **Run the app:**
+   ```bash 
+   npm run start
+   npm run watch
 
